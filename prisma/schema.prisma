@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  category    String?
+  price       String
+  stockStatus String @default("In Stock")
+  imageUrl    String?
+  imageUrl2   String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  promoPosts  PromoPost[]
+  enquiries   Enquiry[]
+}
+
+model PromoPost {
+  id                 Int       @id @default(autoincrement())
+  productId          Int
+  platform           String
+  content            String
+  status             String    @default("draft")
+  facebookPostId     String?
+  instagramMediaId   String?
+  publishedAt        DateTime?
+  createdAt          DateTime  @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Enquiry {
+  id              Int      @id @default(autoincrement())
+  source          String
+  customerName    String?
+  customerHandle  String?
+  customerMessage String
+  customerPhone   String?
+  productId       Int?
+  status          String   @default("new")
+  createdAt       DateTime @default(now())
+
+  product Product? @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id            Int      @id @default(autoincrement())
+  customerName  String
+  phoneNumber   String
+  productName   String
+  quantity      Int      @default(1)
+  totalPrice    Float
+  status        String   @default("Pending")
+  createdAt     DateTime @default(now())
+}
+
+model Settings {
+  id              Int      @id @default(autoincrement())
+  businessName    String   @default("Blestima Foods")
+  whatsappNumber  String   @default("2348036429649")
+  address         String   @default("")
+  deliveryFee     Float    @default(0)
+  logoUrl         String?
+  bannerUrl       String?
+  aboutText         String?  
+  storefrontImageUrl String?
+  facebook      String?
+  instagram     String?
+  tiktok        String?
+}
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
