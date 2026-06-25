@@ -1,8 +1,16 @@
 require("dotenv").config();
 
+const validateEnv = require("./config/validateEnv");
+
+// Validate environment variables before starting the server
+validateEnv();
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const cron = require("node-cron");
+
+const backupDatabase = require("./utils/backupDatabase");
 
 const authRoutes =
   require("./routes/authRoutes");
@@ -17,19 +25,28 @@ const settingsRoutes =
   require("./routes/settingsRoutes");
 
 const app = express();
-
 /*
 |--------------------------------------------------------------------------
 | MIDDLEWARE
 |--------------------------------------------------------------------------
 */
 
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",")
+  : [];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://mullets-yahoo-excretion.ngrok-free.dev",
-    ],
+    origin: function (origin, callback) {
+
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
@@ -99,6 +116,21 @@ app.get("/", (req, res) => {
 | START SERVER
 |--------------------------------------------------------------------------
 */
+
+// Backup database every day at 2:00 AM
+cron.schedule(process.env.BACKUP_SCHEDULE, () => {
+
+  console.log(
+    "Running scheduled database backup..."
+  );
+
+  backupDatabase();
+
+});
+
+console.log(
+  `Automatic database backup scheduled: ${process.env.BACKUP_SCHEDULE}`
+);
 
 const PORT =
   process.env.PORT || 3000;

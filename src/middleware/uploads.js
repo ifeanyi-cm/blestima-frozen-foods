@@ -16,9 +16,9 @@ const storage =
       ) {
 
         cb(
-          null,
-          "uploads/logos"
-        );
+  null,
+  path.join(process.cwd(), "uploads", "logos")
+);
 
       } else if (
         file.fieldname ===
@@ -26,26 +26,25 @@ const storage =
       ) {
 
         cb(
-          null,
-          "uploads/banners"
-        );
-
+  null,
+  path.join(process.cwd(), "uploads", "banners")
+);
       } else if (
         file.fieldname ===
         "storefrontImage"
       ) {
 
-        cb(
-          null,
-          "uploads/storefront"
-        );
+       cb(
+  null,
+  path.join(process.cwd(), "uploads", "storefront")
+);
 
       } else {
 
         cb(
-          null,
-          "uploads"
-        );
+  null,
+  path.join(process.cwd(), "uploads")
+);
 
       }
 
