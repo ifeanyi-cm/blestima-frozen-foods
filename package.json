@@ -4,6 +4,7 @@
   "description": "Automated social media promo chatbot backend",
   "main": "src/server.js",
   "scripts": {
+    "build": "prisma generate",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "prisma": "prisma",
