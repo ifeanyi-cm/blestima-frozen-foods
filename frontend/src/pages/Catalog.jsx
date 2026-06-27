@@ -7,6 +7,8 @@ import {
 
 function Catalog() {
 
+const API_URL = import.meta.env.VITE_API_URL;
+
   const [products, setProducts] =
     useState([]);
 
@@ -451,10 +453,9 @@ cat
 
     <img
       src={
-        currentImages[product.id] === 1 &&
-        product.imageUrl2
-          ? product.imageUrl2
-          : product.imageUrl
+  currentImages[product.id] === 1 && product.imageUrl2
+    ? `${API_URL}${product.imageUrl2}`
+    : `${API_URL}${product.imageUrl}`
       }
       alt={product.name}
       className="
@@ -673,9 +674,9 @@ cat
 
      <img
   src={
-    selectedImage === 0
-      ? selectedProduct.imageUrl
-      : selectedProduct.imageUrl2
+  selectedImage === 0
+    ? `${API_URL}${selectedProduct.imageUrl}`
+    : `${API_URL}${selectedProduct.imageUrl2}`
   }
   alt={selectedProduct.name}
   className="
