@@ -7,3 +7,9 @@ node_modules
 .wwebjs_auth
 .wwebjs_cache
 src/backups/
+
+migration/
+
+prisma/dev.db
+prisma/dev_backup_before_supabase.db
+prisma/full_backup_before_migration.db
