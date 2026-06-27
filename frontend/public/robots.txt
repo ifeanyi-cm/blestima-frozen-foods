@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://blestima-frozen-foods.vercel.app/sitemap.xml
