@@ -57,7 +57,7 @@ function Settings() {
     try {
 
       const res = await fetch(
-        "http://10.249.76.124:3000/api/settings",
+        `${import.meta.env.VITE_API_URL}/api/settings`,
         {
           method: "PUT",
 

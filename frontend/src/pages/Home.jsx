@@ -119,9 +119,8 @@ const featuredProducts =
   useEffect(() => {
 
 console.log("API_URL =", API_URL);
-
- fetch(
-  `/api/products`,
+fetch(
+  `${import.meta.env.VITE_API_URL}/api/products`,
   {
     headers: {
       "ngrok-skip-browser-warning": "true",
@@ -135,8 +134,8 @@ console.log("API_URL =", API_URL);
 })
 .catch(console.error);
 
-  fetch(
-  `/api/settings`,
+fetch(
+  `${import.meta.env.VITE_API_URL}/api/settings`,
   {
     headers: {
       "ngrok-skip-browser-warning": "true",

@@ -231,7 +231,7 @@ formData.append(
     }
 
    const res = await fetch(
-  "/api/settings",
+  `${import.meta.env.VITE_API_URL}/api/settings`,
   {
     method: "PUT",
 
@@ -377,10 +377,9 @@ if (imageFile2) {
 
 }
 
-      const endpoint =
-  editingId
-    ? `/api/products/${editingId}`
-    : `/api/products`;
+      const endpoint = editingId
+  ? `${import.meta.env.VITE_API_URL}/api/products/${editingId}`
+  : `${import.meta.env.VITE_API_URL}/api/products`;
       const method =
         editingId
           ? "PUT"
