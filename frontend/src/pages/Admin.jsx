@@ -269,22 +269,21 @@ formData.append(
   |--------------------------------------------------------------------------
   */
 const token =
-  localStorage.getItem(
-    "adminToken"
-  );
+  localStorage.getItem("adminToken");
 
-if (!token) {
+useEffect(() => {
 
-  navigate("/login");
+  if (!token) {
+    navigate("/login");
+    return;
+  }
 
-  return;
-}
+  loadProducts();
+  loadSettings();
 
-  useEffect(() => {
-    loadProducts();
-    loadSettings();
-  }, []);
+}, [navigate, token]);
 
+  
   /*
   |--------------------------------------------------------------------------
   | RESET FORM
