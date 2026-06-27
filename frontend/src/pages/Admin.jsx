@@ -921,8 +921,9 @@ const res =
 
             <img
   src={
-    product.imageUrl ||
-    "https://via.placeholder.com/400"
+    product.imageUrl
+      ? `${import.meta.env.VITE_API_URL}${product.imageUrl}`
+      : "https://via.placeholder.com/400"
   }
   alt={product.name}
   className="
