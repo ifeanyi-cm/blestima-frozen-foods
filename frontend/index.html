@@ -1,11 +1,26 @@
 <!doctype html>
 <html lang="en">
 
- <head>
+<head>
   <meta charset="UTF-8" />
 
-  <meta name="google-site-verification" content="ZCVjiAYYUjQP2xSSCSwsfpyLKFsRR3O087tGPL3vfBw" />
-  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZ695HXQHS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-KZ695HXQHS');
+  </script>
+
+  <!-- Google Search Console verification -->
+  <meta
+    name="google-site-verification"
+    content="ZCVjiAYYUjQP2xSSCSwsfpyLKFsRR3O087tGPL3vfBw"
+  />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -35,6 +50,7 @@
     content="index, follow"
   />
 
+  <!-- Open Graph -->
   <meta
     property="og:type"
     content="website"
@@ -60,6 +76,7 @@
     content="https://blestima-frozen-foods.onrender.com/uploads/1781984537548.png"
   />
 
+  <!-- Twitter -->
   <meta
     name="twitter:card"
     content="summary_large_image"
@@ -80,14 +97,20 @@
     content="https://blestima-frozen-foods.onrender.com/uploads/1781984537548.png"
   />
 
+  <!-- Favicon -->
   <link
     rel="icon"
     href="/favicon.svg"
   />
 </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<body>
+  <div id="root"></div>
+
+  <script
+    type="module"
+    src="/src/main.jsx"
+  ></script>
+</body>
+
 </html>
