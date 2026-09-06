@@ -1,5 +1,8 @@
 User-agent: *
-
 Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /orders
+Disallow: /settings
 
 Sitemap: https://blestima-frozen-foods.vercel.app/sitemap.xml
