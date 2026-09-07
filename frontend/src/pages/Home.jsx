@@ -1278,7 +1278,7 @@ convenient ordering options and delivery
   >
 
     <img
-  src="/images/blestima-delivery-banner.png"
+  src="/images/blestima-delivery-banner.webp"
   alt="Blestima Delivery Service"
   className="
     mx-auto
