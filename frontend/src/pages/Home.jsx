@@ -436,6 +436,8 @@ setShowCart(
     <img
   src={`${import.meta.env.VITE_API_URL}${settings.logoUrl}`}
   alt="Logo"
+  width="320"
+  height="160"
   className="
     h-20
     md:h-32
@@ -447,7 +449,7 @@ setShowCart(
     p-3
     mb-4
   "
-    />
+/>
 
   )}
 
