@@ -887,26 +887,28 @@ md:p-8
 
  <img
   src={
-  currentImages[product.id] === 1 &&
-  product.imageUrl2
-    ? `${import.meta.env.VITE_API_URL}${product.imageUrl2}`
-    : product.imageUrl
-      ? `${import.meta.env.VITE_API_URL}${product.imageUrl}`
-      : null
-}
+    currentImages[product.id] === 1 &&
+    product.imageUrl2
+      ? `${API_URL}${product.imageUrl2}`
+      : product.imageUrl
+        ? `${API_URL}${product.imageUrl}`
+        : undefined
+  }
   onError={() =>
-  console.log(
-    "BROKEN:",
-    product.id,
-    product.name,
-    `${import.meta.env.VITE_API_URL}${product.imageUrl2}`
-  )
-}
+    console.log(
+      "BROKEN:",
+      product.id,
+      product.name
+    )
+  }
   alt={product.name}
+  loading="lazy"
+  decoding="async"
+  width="600"
+  height="600"
   className="
     w-full
-    h-45
-    md:h-78
+    aspect-square
     object-cover
     transition-all
     duration-700
