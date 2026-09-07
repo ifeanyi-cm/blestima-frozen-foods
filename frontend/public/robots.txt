@@ -5,4 +5,4 @@ Disallow: /admin
 Disallow: /orders
 Disallow: /settings
 
-Sitemap: https://blestima-frozen-foods.vercel.app/sitemap.xml
+Sitemap: https://blestimacoldroomfrozenfoods.com.ng/sitemap.xml
