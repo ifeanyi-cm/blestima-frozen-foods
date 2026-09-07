@@ -170,52 +170,30 @@ fetch(
 }, []);
 
 useEffect(() => {
+  const productsWithSecondImage = products.filter(
+    (product) => product.imageUrl2
+  );
 
-  const interval = setInterval(() => {
-
-    setCurrentImages((prev) => {
-
-      const updated = { ...prev };
-
-      products.forEach((product) => {
-
-  if (
-    product.imageUrl2
-  ) {
-
-    if (!product.imageUrl) {
-  console.log("MISSING IMAGE:", product);
-}
-
-if (product.imageUrl2 === "") {
-  console.log("EMPTY IMAGE2:", product.id, product.name);
-}
-
-    updated[
-      product.id
-    ] =
-      updated[
-        product.id
-      ] === 1
-        ? 0
-        : 1;
-
+  if (productsWithSecondImage.length === 0) {
+    return;
   }
 
-});
+  const interval = setInterval(() => {
+    setCurrentImages((prev) => {
+      const updated = { ...prev };
 
-console.log(updated);
+      productsWithSecondImage.forEach((product) => {
+        updated[product.id] =
+          updated[product.id] === 1 ? 0 : 1;
+      });
 
       return updated;
-
     });
-
   }, 3000);
 
   return () => {
     clearInterval(interval);
   };
-
 }, [products]);
  
 useEffect(() => {
