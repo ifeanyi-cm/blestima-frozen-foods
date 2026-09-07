@@ -501,20 +501,22 @@ delivered to your doorstep.
 
  {settings.storefrontImageUrl && (
   <img
-    src={`${import.meta.env.VITE_API_URL}${settings.storefrontImageUrl}`}
-    alt="Store Frontage"
-    width="1200"
-    height="800"
-    className="
-      absolute
-      inset-0
-      w-full
-      h-full
-      object-cover
-      scale-155
-      md:scale-100
-    "
-  />
+  src={`${import.meta.env.VITE_API_URL}${settings.storefrontImageUrl}`}
+  alt="Store Frontage"
+  width="1200"
+  height="800"
+  fetchPriority="high"
+  decoding="async"
+  className="
+    absolute
+    inset-0
+    w-full
+    h-full
+    object-cover
+    scale-155
+    md:scale-100
+  "
+/>
 )}
 
   <div

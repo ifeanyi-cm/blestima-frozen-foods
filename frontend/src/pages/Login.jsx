@@ -1,36 +1,26 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-
   const navigate = useNavigate();
 
-  const [username, setUsername] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const [loading, setLoading] =
-    useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin() {
-
     try {
-
       setLoading(true);
 
       const res = await fetch(
-  `${import.meta.env.VITE_API_URL}/api/auth/login`,
-  {
-    headers: {
-      "ngrok-skip-browser-warning": "true",
-    },
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        {
           method: "POST",
 
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true",
           },
 
           body: JSON.stringify({
@@ -40,14 +30,12 @@ function Login() {
         }
       );
 
-      const data =
-        await res.json();
+      const data = await res.json();
 
       if (!data.success) {
-
         alert(
           data.message ||
-          "Login failed"
+          "Invalid username or password"
         );
 
         return;
@@ -66,23 +54,18 @@ function Login() {
       navigate("/admin");
 
     } catch (error) {
-
-      console.error(error);
+      console.error("Login error:", error);
 
       alert(
-        "Unable to login"
+        "Unable to connect to the server. Please check your internet connection and try again."
       );
 
     } finally {
-
       setLoading(false);
-
     }
-
   }
 
   return (
-
     <div
       className="
         min-h-screen
@@ -92,7 +75,6 @@ function Login() {
         bg-gray-100
       "
     >
-
       <div
         className="
           bg-white
@@ -103,7 +85,6 @@ function Login() {
           max-w-md
         "
       >
-
         <h1
           className="
             text-3xl
@@ -120,9 +101,7 @@ function Login() {
           placeholder="Username"
           value={username}
           onChange={(e) =>
-            setUsername(
-              e.target.value
-            )
+            setUsername(e.target.value)
           }
           className="
             w-full
@@ -138,9 +117,7 @@ function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
+            setPassword(e.target.value)
           }
           className="
             w-full
@@ -167,11 +144,10 @@ function Login() {
             ? "Logging in..."
             : "Login"}
         </button>
-
       </div>
-
     </div>
   );
 }
 
 export default Login;
+

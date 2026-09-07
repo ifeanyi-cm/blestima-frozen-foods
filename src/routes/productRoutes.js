@@ -8,6 +8,7 @@ const router = express.Router();
 const prisma = require("../db/prisma");
 
 const upload = require("../config/multer");
+const optimizeProductImages = require("../middleware/optimizeProductImages");
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,8 @@ router.post(
       maxCount: 1,
     },
   ]),
+
+  optimizeProductImages,
 
   async (req, res) => {
     
@@ -165,7 +168,7 @@ router.put(
       maxCount: 1,
     },
   ]),
-
+  optimizeProductImages,
   async (req, res) => {
 
 
@@ -292,3 +295,5 @@ router.delete(
 );
 
 module.exports = router;
+
+
