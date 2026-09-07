@@ -52,7 +52,7 @@ console.log("CHATBOT FIRST 100:", text.substring(0, 100));
       console.error("CHATBOT ERROR:", err);
     });
 
-  }, []);
+    }, [open]);
 
   /*
   |--------------------------------------------------------------------------
