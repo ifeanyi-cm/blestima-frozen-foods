@@ -1276,10 +1276,11 @@ convenient ordering options and delivery
   "
 
   >
-
-    <img
+<img
   src="/images/blestima-delivery-banner.webp"
   alt="Blestima Delivery Service"
+  width="800"
+  height="610"
   className="
     mx-auto
     md:w-[80%]
