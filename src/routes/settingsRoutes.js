@@ -3,7 +3,8 @@ const auth =
 
 const upload =
   require("../config/multer");
-  
+ const optimizeSettingsImages = require("../middleware/optimizeSettingsImages"); 
+
 const express =
   require("express");
 
@@ -72,6 +73,8 @@ router.post(
       maxCount: 1,
     },
   ]),
+  optimizeSettingsImages,
+
   async (req, res) => {
 
     try {
@@ -180,20 +183,20 @@ router.put(
   "/",
   auth,
   upload.fields([
-  {
-    name: "logo",
-    maxCount: 1,
-  },
-  {
-    name: "banner",
-    maxCount: 1,
-  },
-  {
-    name: "storefrontImage",
-    maxCount: 1,
-  },
-]),
-
+    {
+      name: "logo",
+      maxCount: 1,
+    },
+    {
+      name: "banner",
+      maxCount: 1,
+    },
+    {
+      name: "storefrontImage",
+      maxCount: 1,
+    },
+  ]),
+  optimizeSettingsImages,
   async (req, res) => {
 
     try {
