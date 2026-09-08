@@ -280,13 +280,28 @@ ${orderDetails}
 
 Total: ₦${cartTotal.toLocaleString()}`;
 
- window.open(
+ trackEvent("begin_checkout", {
+  currency: "NGN",
+  value: Number(cartTotal) || 0,
+  items: cart.map((item) => ({
+    item_id: String(item.id),
+    item_name: item.name,
+    price: Number(
+      String(item.price)
+        .replace("â‚¦", "")
+        .replace(/,/g, "")
+        .replace(/ Per\/.*/g, "")
+    ) || 0,
+    quantity: item.quantity,
+  })),
+});
+
+window.open(
   `https://wa.me/2348036429649?text=${encodeURIComponent(message)}`,
   "_blank"
 );
 
 setCart([]);
-
 localStorage.removeItem(
   "cart"
 );
