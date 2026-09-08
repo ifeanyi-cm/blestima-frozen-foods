@@ -548,6 +548,60 @@ const res =
 
 </div>
 
+{/* ORDERS */}
+
+<div
+  className="
+    bg-white
+    p-6
+    rounded-2xl
+    shadow-lg
+    mb-10
+  "
+>
+
+  <div
+    className="
+      flex
+      flex-col
+      md:flex-row
+      md:items-center
+      md:justify-between
+      gap-4
+    "
+  >
+
+    <div>
+
+      <h2 className="text-2xl font-bold">
+        Customer Orders
+      </h2>
+
+      <p className="text-gray-600 mt-1">
+        View and manage customer orders.
+      </p>
+
+    </div>
+
+    <button
+      onClick={() => navigate("/orders")}
+      className="
+        bg-blue-600
+        text-white
+        px-5
+        py-3
+        rounded-lg
+        font-bold
+        hover:bg-blue-700
+      "
+    >
+      Manage Orders
+    </button>
+
+  </div>
+
+</div>
+
       {/* BUSINESS SETTINGS */}
 
       <div
