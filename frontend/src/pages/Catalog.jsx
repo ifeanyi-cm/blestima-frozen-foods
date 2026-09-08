@@ -458,12 +458,24 @@ cat
     product.name
   );
 
+  trackEvent("view_item", {
+    currency: "NGN",
+    value: Number(product.price) || 0,
+    items: [
+      {
+        item_id: String(product.id),
+        item_name: product.name,
+        price: Number(product.price) || 0,
+        quantity: 1,
+      },
+    ],
+  });
+
   setSelectedProduct(product);
 
   setSelectedImage(0);
 
-
-  }}
+}}
   className="
     bg-white
     rounded-xl
