@@ -10,7 +10,7 @@ function Orders() {
     try {
 
       const res = await fetch(
-        "import.meta.env.VITE_API_URL/api/orders"
+        `${import.meta.env.VITE_API_URL}/api/orders`
       );
 
       const data =
@@ -34,7 +34,7 @@ function Orders() {
     try {
 
       await fetch(
-        `import.meta.env.VITE_API_URL/api/orders/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/orders/${id}`,
         {
           method: "PUT",
 
