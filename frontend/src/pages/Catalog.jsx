@@ -1,4 +1,5 @@
 import ChatBot from "../components/ChatBot";
+import { trackEvent } from "../utils/analytics";
 
 import {
   useEffect,
@@ -185,6 +186,19 @@ function addToCart(product) {
         item.id === product.id
     );
 
+  trackEvent("add_to_cart", {
+    currency: "NGN",
+    value: Number(product.price) || 0,
+    items: [
+      {
+        item_id: String(product.id),
+        item_name: product.name,
+        price: Number(product.price) || 0,
+        quantity: 1,
+      },
+    ],
+  });
+
   if (existingItem) {
 
     setCart(
@@ -216,7 +230,6 @@ function addToCart(product) {
   }
 
 }
-
 function removeFromCart(productId) {
 
   setCart(
