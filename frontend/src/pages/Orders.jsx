@@ -9,8 +9,17 @@ function Orders() {
 
     try {
 
+      const token =
+        localStorage.getItem("adminToken");
+
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/orders`
+        `${import.meta.env.VITE_API_URL}/api/orders`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`,
+          },
+        }
       );
 
       const data =
@@ -41,6 +50,9 @@ function Orders() {
           headers: {
             "Content-Type":
               "application/json",
+
+            Authorization:
+              `Bearer ${localStorage.getItem("adminToken")}`,
           },
 
           body: JSON.stringify({
@@ -120,7 +132,7 @@ function Orders() {
 
             <p>
               Total:
-              ₦{order.totalPrice}
+              &#8358;{order.totalPrice}
             </p>
 
             <p>
@@ -206,3 +218,5 @@ function Orders() {
 }
 
 export default Orders;
+
+
