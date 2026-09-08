@@ -113,6 +113,32 @@ function Orders() {
             </h3>
 
             <p>
+              Order Date:
+              {" "}
+              {new Date(order.createdAt).toLocaleDateString(
+                "en-NG",
+                {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }
+              )}
+            </p>
+
+            <p>
+              Order Time:
+              {" "}
+              {new Date(order.createdAt).toLocaleTimeString(
+                "en-NG",
+                {
+                  hour: "numeric",
+                  minute: "2-digit",
+                  hour12: true,
+                }
+              )}
+            </p>
+
+            <p>
               Product:
               {" "}
               {order.productName}
