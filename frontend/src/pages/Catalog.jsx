@@ -232,6 +232,39 @@ function addToCart(product) {
 }
 function removeFromCart(productId) {
 
+  const item = cart.find(
+    (item) =>
+      item.id === productId
+  );
+
+  if (item) {
+
+    trackEvent("remove_from_cart", {
+      currency: "NGN",
+      value:
+        (Number(
+          String(item.price)
+            .replace("â‚¦", "")
+            .replace(/,/g, "")
+            .replace(/ Per\/.*/g, "")
+        ) || 0) * item.quantity,
+      items: [
+        {
+          item_id: String(item.id),
+          item_name: item.name,
+          price: Number(
+            String(item.price)
+              .replace("â‚¦", "")
+              .replace(/,/g, "")
+              .replace(/ Per\/.*/g, "")
+          ) || 0,
+          quantity: item.quantity,
+        },
+      ],
+    });
+
+  }
+
   setCart(
     cart.filter(
       (item) =>
