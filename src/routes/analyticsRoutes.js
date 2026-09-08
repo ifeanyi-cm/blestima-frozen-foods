@@ -60,4 +60,78 @@ if (startDate === "monthStart") {
   }
 });
 
+router.get("/breakdowns", auth, async (req, res) => {
+  try {
+    const startDate = req.query.startDate || "7daysAgo";
+    const endDate = req.query.endDate || "today";
+
+    const [countriesResponse, devicesResponse, sourcesResponse] =
+      await Promise.all([
+        runAnalyticsReport({
+          startDate,
+          endDate,
+          dimensions: ["country"],
+          metrics: ["activeUsers"],
+        }),
+
+        runAnalyticsReport({
+          startDate,
+          endDate,
+          dimensions: ["deviceCategory"],
+          metrics: ["activeUsers"],
+        }),
+
+        runAnalyticsReport({
+          startDate,
+          endDate,
+          dimensions: ["sessionSource"],
+          metrics: ["sessions"],
+        }),
+      ]);
+
+    const countries =
+      countriesResponse.rows?.map((row) => ({
+        country:
+          row.dimensionValues?.[0]?.value || "Unknown",
+        activeUsers:
+          Number(row.metricValues?.[0]?.value || 0),
+      })) || [];
+
+    const devices =
+      devicesResponse.rows?.map((row) => ({
+        device:
+          row.dimensionValues?.[0]?.value || "Unknown",
+        activeUsers:
+          Number(row.metricValues?.[0]?.value || 0),
+      })) || [];
+
+    const trafficSources =
+      sourcesResponse.rows?.map((row) => ({
+        source:
+          row.dimensionValues?.[0]?.value || "Unknown",
+        sessions:
+          Number(row.metricValues?.[0]?.value || 0),
+      })) || [];
+
+    res.json({
+      success: true,
+      startDate,
+      endDate,
+      countries,
+      devices,
+      trafficSources,
+    });
+  } catch (error) {
+    console.error(
+      "Analytics breakdowns error:",
+      error
+    );
+
+    res.status(500).json({
+      success: false,
+      error: "Failed to fetch analytics breakdowns",
+    });
+  }
+});
+
 module.exports = router;

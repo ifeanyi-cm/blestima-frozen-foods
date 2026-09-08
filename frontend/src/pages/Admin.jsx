@@ -14,6 +14,9 @@ const [analytics, setAnalytics] = useState(null);
 const [analyticsRange, setAnalyticsRange] = useState("7daysAgo");
 const [analyticsLoading, setAnalyticsLoading] = useState(false);
 
+const [analyticsBreakdowns, setAnalyticsBreakdowns] =
+  useState(null);
+
   const [editingId, setEditingId] =
     useState(null);
 
@@ -202,6 +205,44 @@ setTiktok(
     }
   }
 
+  async function loadAnalyticsBreakdowns(
+    range = analyticsRange
+  ) {
+    try {
+      const token =
+        localStorage.getItem("adminToken");
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/analytics/breakdowns?startDate=${range}&endDate=today`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data =
+        await res.json();
+
+      if (data.success) {
+
+        console.log("ANALYTICS BREAKDOWNS:", data);
+
+        setAnalyticsBreakdowns(data);
+      } else {
+        console.error(
+          "Analytics breakdowns error:",
+          data
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Failed to load analytics breakdowns:",
+        error
+      );
+    }
+  }
+
   async function saveSettings() {
   try {
 
@@ -321,6 +362,7 @@ useEffect(() => {
   loadProducts();
   loadSettings();
   loadAnalytics();
+  loadAnalyticsBreakdowns();
 
 }, [navigate, token]);
 
@@ -765,6 +807,130 @@ const res =
 
 </div>
 
+  {analyticsBreakdowns && (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+
+      {/* VISITOR LOCATIONS */}
+
+      <div className="bg-gray-50 p-5 rounded-xl">
+
+        <h3 className="text-lg font-bold mb-4">
+          🌍 Visitor Locations
+        </h3>
+
+        {analyticsBreakdowns.countries?.length > 0 ? (
+          <div className="space-y-3">
+
+            {analyticsBreakdowns.countries.map(
+              (item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center"
+                >
+
+                  <span className="text-gray-700">
+                    {item.country}
+                  </span>
+
+                  <span className="font-bold">
+                    {item.activeUsers}
+                  </span>
+
+                </div>
+              )
+            )}
+
+          </div>
+        ) : (
+          <p className="text-gray-500">
+            No visitor location data.
+          </p>
+        )}
+
+      </div>
+
+
+      {/* DEVICE BREAKDOWN */}
+
+      <div className="bg-gray-50 p-5 rounded-xl">
+
+        <h3 className="text-lg font-bold mb-4">
+          💻 Device Breakdown
+        </h3>
+
+        {analyticsBreakdowns.devices?.length > 0 ? (
+          <div className="space-y-3">
+
+            {analyticsBreakdowns.devices.map(
+              (item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center"
+                >
+
+                  <span className="text-gray-700 capitalize">
+                    {item.device}
+                  </span>
+
+                  <span className="font-bold">
+                    {item.activeUsers}
+                  </span>
+
+                </div>
+              )
+            )}
+
+          </div>
+        ) : (
+          <p className="text-gray-500">
+            No device data.
+          </p>
+        )}
+
+      </div>
+
+
+      {/* TRAFFIC SOURCES */}
+
+      <div className="bg-gray-50 p-5 rounded-xl">
+
+        <h3 className="text-lg font-bold mb-4">
+          🔗 Traffic Sources
+        </h3>
+
+        {analyticsBreakdowns.trafficSources?.length > 0 ? (
+          <div className="space-y-3">
+
+            {analyticsBreakdowns.trafficSources.map(
+              (item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center"
+                >
+
+                  <span className="text-gray-700">
+                    {item.source}
+                  </span>
+
+                  <span className="font-bold">
+                    {item.sessions}
+                  </span>
+
+                </div>
+              )
+            )}
+
+          </div>
+        ) : (
+          <p className="text-gray-500">
+            No traffic source data.
+          </p>
+        )}
+
+      </div>
+
+    </div>
+  )}
 
       {/* BUSINESS SETTINGS */}
 
