@@ -1,3 +1,5 @@
+const auth = require("../middleware/auth");
+
 const express = require("express");
 
 const router = express.Router();
@@ -10,7 +12,7 @@ const prisma = require("../db/prisma");
 |--------------------------------------------------------------------------
 */
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
 
   try {
 
@@ -96,7 +98,7 @@ router.post("/", async (req, res) => {
 |--------------------------------------------------------------------------
 */
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
 
   try {
 
