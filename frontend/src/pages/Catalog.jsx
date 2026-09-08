@@ -289,7 +289,7 @@ const cartTotal =
     0
   );
 
-function checkoutWhatsApp() {
+async function checkoutWhatsApp() {
 
   const orderDetails =
     cart
@@ -328,6 +328,50 @@ Total: ₦${cartTotal.toLocaleString()}`;
     quantity: item.quantity,
   })),
 });
+
+  try {
+
+    await Promise.all(
+      cart.map(async (item) => {
+
+        const itemPrice =
+          Number(
+            String(item.price)
+              .replace(/,/g, "")
+              .replace(/ Per\/.*/g, "")
+          ) || 0;
+
+        await fetch(
+          `${import.meta.env.VITE_API_URL}/api/orders`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              customerName,
+              phoneNumber: customerPhone,
+              productName: item.name,
+              quantity: item.quantity,
+              totalPrice:
+                itemPrice * item.quantity,
+            }),
+          }
+        );
+
+      })
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Failed to create order:",
+      error
+    );
+
+  }
 
 window.open(
   `https://wa.me/2348036429649?text=${encodeURIComponent(message)}`,
@@ -1244,3 +1288,4 @@ cat
 }
 
 export default Catalog;
+
