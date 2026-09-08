@@ -10,6 +10,10 @@ const navigate =
 
   const [products, setProducts] = useState([]);
 
+const [analytics, setAnalytics] = useState(null);
+const [analyticsRange, setAnalyticsRange] = useState("7daysAgo");
+const [analyticsLoading, setAnalyticsLoading] = useState(false);
+
   const [editingId, setEditingId] =
     useState(null);
 
@@ -162,6 +166,42 @@ setTiktok(
     }
   }
 
+  async function loadAnalytics(range = analyticsRange) {
+    try {
+      setAnalyticsLoading(true);
+
+      const token =
+        localStorage.getItem("adminToken");
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/analytics/overview?startDate=${range}&endDate=today`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        setAnalytics(data.overview);
+      } else {
+        console.error(
+          "Analytics error:",
+          data
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Failed to load analytics:",
+        error
+      );
+    } finally {
+      setAnalyticsLoading(false);
+    }
+  }
+
   async function saveSettings() {
   try {
 
@@ -280,6 +320,7 @@ useEffect(() => {
 
   loadProducts();
   loadSettings();
+  loadAnalytics();
 
 }, [navigate, token]);
 
@@ -601,6 +642,129 @@ const res =
   </div>
 
 </div>
+
+{/* ANALYTICS */}
+
+<div
+  className="
+    bg-white
+    p-6
+    rounded-2xl
+    shadow-lg
+    mb-10
+  "
+>
+  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+    <div>
+      <h2 className="text-2xl font-bold">
+        Analytics
+      </h2>
+
+      <p className="text-gray-600 mt-1">
+        Monitor customer activity and website performance.
+      </p>
+    </div>
+
+    <select
+      value={analyticsRange}
+      onChange={(e) => {
+        setAnalyticsRange(e.target.value);
+        loadAnalytics(e.target.value);
+      }}
+      className="border p-3 rounded-lg"
+    >
+      <option value="today">
+        Today
+      </option>
+
+      <option value="7daysAgo">
+        Last 7 Days
+      </option>
+
+      <option value="30daysAgo">
+        Last 30 Days
+      </option>
+
+      <option value="monthStart">
+        This Month
+      </option>
+    </select>
+
+  </div>
+
+  {analyticsLoading ? (
+    <p className="text-gray-600">
+      Loading analytics...
+    </p>
+  ) : analytics ? (
+
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          Active Users
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.activeUsers}
+        </p>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          New Users
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.newUsers}
+        </p>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          Sessions
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.sessions}
+        </p>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          Page Views
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.pageViews}
+        </p>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          Add to Cart
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.addToCart}
+        </p>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-xl">
+        <p className="text-sm text-gray-600">
+          Checkout Starts
+        </p>
+        <p className="text-2xl font-bold mt-1">
+          {analytics.checkoutStarts}
+        </p>
+      </div>
+
+    </div>
+
+  ) : (
+    <p className="text-gray-600">
+      Analytics data is not available.
+    </p>
+  )}
+
+</div>
+
 
       {/* BUSINESS SETTINGS */}
 

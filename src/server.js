@@ -24,6 +24,9 @@ const orderRoutes =
 const settingsRoutes =
   require("./routes/settingsRoutes");
 
+const analyticsRoutes =
+  require("./routes/analyticsRoutes");
+
 const app = express();
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +92,11 @@ app.use(
 app.use(
   "/api/settings",
   settingsRoutes
+);
+
+app.use(
+  "/api/analytics",
+  analyticsRoutes
 );
 
 app.use(
