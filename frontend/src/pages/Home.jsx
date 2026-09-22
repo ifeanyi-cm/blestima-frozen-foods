@@ -884,13 +884,17 @@ md:p-8
 
  <img
   src={
-    currentImages[product.id] === 1 &&
-    product.imageUrl2
-      ? `${API_URL}${product.imageUrl2}`
-      : product.imageUrl
-        ? `${API_URL}${product.imageUrl}`
-        : undefined
-  }
+  currentImages[product.id] === 1 &&
+  product.imageUrl2
+    ? product.imageUrl2.startsWith("http")
+      ? product.imageUrl2
+      : `${API_URL}${product.imageUrl2}`
+    : product.imageUrl
+      ? product.imageUrl.startsWith("http")
+        ? product.imageUrl
+        : `${API_URL}${product.imageUrl}`
+      : undefined
+}
   onError={() =>
     console.log(
       "BROKEN:",
