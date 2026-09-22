@@ -569,11 +569,17 @@ cat
   <div className="overflow-hidden relative">
 
     <img
-      src={
+     src={
   currentImages[product.id] === 1 && product.imageUrl2
-    ? `${API_URL}${product.imageUrl2}`
-    : `${API_URL}${product.imageUrl}`
-      }
+    ? product.imageUrl2.startsWith("http")
+      ? product.imageUrl2
+      : `${API_URL}${product.imageUrl2}`
+    : product.imageUrl
+      ? product.imageUrl.startsWith("http")
+        ? product.imageUrl
+        : `${API_URL}${product.imageUrl}`
+      : undefined
+}
       alt={product.name}
       className="
   w-full
