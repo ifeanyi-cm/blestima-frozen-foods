@@ -770,11 +770,14 @@ md:p-8
   alt="Promotional Banner"
   className="
     w-full
+    md:w-[75%]
+    lg:w-[65%]
     h-auto
     aspect-[1374/1145]
     object-contain
     block
-  "
+    mx-auto
+"
 
       />
 
