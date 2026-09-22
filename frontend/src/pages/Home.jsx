@@ -987,9 +987,9 @@ md:p-8
 
 <div
   className="
-    p-3
-    md:p-5
-  "
+  p-2
+  md:p-5
+"
 >
               
   <h3
