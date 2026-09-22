@@ -1126,15 +1126,21 @@ const res =
             Upload Banner
           </label>
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) =>
-              setBannerFile(
-                e.target.files[0]
-              )
-            }
-            className="border p-3 rounded-lg"
+       <label className="font-semibold">
+  Upload Banner
+</label>
+
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) =>
+    setBannerFile(
+      e.target.files[0]
+    )
+  }
+  className="border p-3 md:p-2 md:h-10 rounded-lg"
+
+
           />
 
           <button
@@ -1303,11 +1309,13 @@ const res =
             className="bg-white rounded-2xl shadow-lg overflow-hidden"
           >
 
-            <img
+           <img
   src={
     product.imageUrl
-      ? `${import.meta.env.VITE_API_URL}${product.imageUrl}`
-      : "https://via.placeholder.com/400"
+      ? product.imageUrl.includes("supabase.co")
+        ? product.imageUrl
+        : `${import.meta.env.VITE_API_URL}${product.imageUrl}`
+      : undefined
   }
   alt={product.name}
   className="
@@ -1316,8 +1324,7 @@ const res =
     md:h-40
     object-cover
   "
-
-            />
+/>
 
             <div className="p-2">
 
