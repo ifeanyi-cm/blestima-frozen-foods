@@ -750,7 +750,7 @@ md:p-8
     
   className="
     w-[95%]
-    md:w-[85%]
+    md:w-[75%]
     mx-auto
     overflow-hidden
     rounded-xl
@@ -762,11 +762,12 @@ md:p-8
       <img
         src={`${import.meta.env.VITE_API_URL}${settings.bannerUrl}`}
         alt="Promotional Banner"
-        className="
+      className="
   w-full
-  h-[250px]
-  md:h-auto
-  object-contain
+  h-auto
+  max-h-[180px]
+  md:max-h-[220px]
+  object-cover
 "
       />
 

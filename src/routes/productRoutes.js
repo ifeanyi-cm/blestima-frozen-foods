@@ -9,6 +9,7 @@ const prisma = require("../db/prisma");
 
 const upload = require("../config/multer");
 const optimizeProductImages = require("../middleware/optimizeProductImages");
+const uploadToSupabase = require("../utils/supabaseUpload");
 
 /*
 |--------------------------------------------------------------------------
@@ -90,12 +91,16 @@ let finalImageUrl =
 let finalImageUrl2 =
   imageUrl2 || "";
       if (
-        req.files &&
-        req.files.image
-      ) {
+  req.files &&
+  req.files.image
+) {
 
-        finalImageUrl =
-  `/uploads/${req.files.image[0].filename}`;
+  finalImageUrl =
+    await uploadToSupabase(
+      req.files.image[0],
+      "products"
+    );
+
 
       }
       
@@ -111,7 +116,11 @@ let finalImageUrl2 =
 ) {
 
   finalImageUrl2 =
-    `/uploads/${req.files.image2[0].filename}`;
+    await uploadToSupabase(
+      req.files.image2[0],
+      "products"
+    );
+
 
 }
 
@@ -204,7 +213,12 @@ let finalImageUrl2 =
 ) {
 
   finalImageUrl =
-    `/uploads/${req.files.image[0].filename}`;
+    await uploadToSupabase(
+      req.files.image[0],
+      "products"
+    );
+
+
 
 }
 
@@ -214,7 +228,10 @@ let finalImageUrl2 =
 ) {
 
   finalImageUrl2 =
-    `/uploads/${req.files.image2[0].filename}`;
+    await uploadToSupabase(
+      req.files.image2[0],
+      "products"
+    );
 
 }
 

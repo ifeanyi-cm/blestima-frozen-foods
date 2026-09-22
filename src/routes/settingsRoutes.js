@@ -4,6 +4,7 @@ const auth =
 const upload =
   require("../config/multer");
  const optimizeSettingsImages = require("../middleware/optimizeSettingsImages"); 
+const uploadToSupabase = require("../utils/supabaseUpload");
 
 const express =
   require("express");
@@ -241,14 +242,18 @@ router.put(
   `/uploads/${req.files.logo[0].filename}`;
       }
 
-      if (
-        req.files &&
-        req.files.banner
-      ) {
+     if (
+  req.files &&
+  req.files.banner
+) {
 
-        updateData.bannerUrl =
-  `/uploads/${req.files.banner[0].filename}`;
-      }
+  updateData.bannerUrl =
+    await uploadToSupabase(
+      req.files.banner[0],
+      "settings"
+    );
+
+}
       
 if (
   req.files &&
