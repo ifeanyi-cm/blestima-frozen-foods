@@ -795,19 +795,20 @@ cat
       "
     >
 
-     src={
-  selectedImage === 0
-    ? selectedProduct.imageUrl
-      ? selectedProduct.imageUrl.includes("supabase.co")
-        ? selectedProduct.imageUrl
-        : `${API_URL}${selectedProduct.imageUrl}`
-      : undefined
-    : selectedProduct.imageUrl2
-      ? selectedProduct.imageUrl2.includes("supabase.co")
-        ? selectedProduct.imageUrl2
-        : `${API_URL}${selectedProduct.imageUrl2}`
-      : undefined
-}
+    <img
+  src={
+    selectedImage === 0
+      ? selectedProduct.imageUrl
+        ? selectedProduct.imageUrl.includes("supabase.co")
+          ? selectedProduct.imageUrl
+          : `${API_URL}${selectedProduct.imageUrl}`
+        : undefined
+      : selectedProduct.imageUrl2
+        ? selectedProduct.imageUrl2.includes("supabase.co")
+          ? selectedProduct.imageUrl2
+          : `${API_URL}${selectedProduct.imageUrl2}`
+        : undefined
+  }
   alt={selectedProduct.name}
   className="
     w-full
@@ -815,15 +816,14 @@ cat
     md:h-80
     object-cover
   "
+/>
 
-      <div 
+<div
   className="
     p-2
     md:p-6
   "
-
 >
-
         <h2
           className="
   text-xl

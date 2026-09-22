@@ -1534,25 +1534,26 @@ gap-6
 
 
 
-    src={
-  selectedImage === 1 && selectedProduct.imageUrl2
-    ? selectedProduct.imageUrl2.includes("supabase.co")
-      ? selectedProduct.imageUrl2
-      : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl2}`
-    : selectedProduct.imageUrl
-      ? selectedProduct.imageUrl.includes("supabase.co")
-        ? selectedProduct.imageUrl
-        : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl}`
-      : undefined
-}
+    <img
+  src={
+    selectedImage === 1 && selectedProduct.imageUrl2
+      ? selectedProduct.imageUrl2.includes("supabase.co")
+        ? selectedProduct.imageUrl2
+        : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl2}`
+      : selectedProduct.imageUrl
+        ? selectedProduct.imageUrl.includes("supabase.co")
+          ? selectedProduct.imageUrl
+          : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl}`
+        : undefined
+  }
   alt={selectedProduct.name}
   className="
     w-full
-    h-56 md:h-80
+    h-56
+    md:h-80
     object-cover
   "
-
-
+/>
 
 {selectedProduct.imageUrl2 && (
 
