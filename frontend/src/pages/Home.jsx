@@ -987,7 +987,7 @@ md:p-8
 
 <div
   className="
-  p-2
+  p-1
   md:p-5
 "
 >
@@ -1534,13 +1534,17 @@ gap-6
 
 
 
-    <img
-  src={
-    selectedImage === 1 &&
-    selectedProduct.imageUrl2
-      ? `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl2}`
-      : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl}`
-  }
+    src={
+  selectedImage === 1 && selectedProduct.imageUrl2
+    ? selectedProduct.imageUrl2.includes("supabase.co")
+      ? selectedProduct.imageUrl2
+      : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl2}`
+    : selectedProduct.imageUrl
+      ? selectedProduct.imageUrl.includes("supabase.co")
+        ? selectedProduct.imageUrl
+        : `${import.meta.env.VITE_API_URL}${selectedProduct.imageUrl}`
+      : undefined
+}
   alt={selectedProduct.name}
   className="
     w-full
@@ -1548,7 +1552,7 @@ gap-6
     object-cover
   "
 
-/>
+
 
 {selectedProduct.imageUrl2 && (
 
