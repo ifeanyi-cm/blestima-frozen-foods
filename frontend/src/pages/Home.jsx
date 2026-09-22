@@ -750,7 +750,7 @@ md:p-8
     
   className="
     w-[95%]
-    md:w-[75%]
+    md:w-[85%]
     mx-auto
     overflow-hidden
     rounded-xl
@@ -759,16 +759,23 @@ md:p-8
   "
     >
 
-      <img
-        src={`${import.meta.env.VITE_API_URL}${settings.bannerUrl}`}
-        alt="Promotional Banner"
-      className="
-  w-full
-  h-auto
-  max-h-[180px]
-  md:max-h-[220px]
-  object-cover
-"
+     <img
+  src={
+    settings.bannerUrl
+      ? settings.bannerUrl.startsWith("http")
+        ? settings.bannerUrl
+        : `${import.meta.env.VITE_API_URL}${settings.bannerUrl}`
+      : undefined
+  }
+  alt="Promotional Banner"
+  className="
+    w-full
+    h-auto
+    aspect-[1374/1145]
+    object-contain
+    block
+  "
+
       />
 
     </div>
