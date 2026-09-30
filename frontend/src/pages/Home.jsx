@@ -1,3 +1,4 @@
+import "../blestimaRefresh.css";
 import { Link } from "react-router-dom";
 
 import ChatBot from "../components/ChatBot";
@@ -6,6 +7,7 @@ import { trackEvent } from "../utils/analytics";
 import {
   useEffect,
   useState,
+  useRef,
 } from "react";
 
 import {
@@ -29,6 +31,8 @@ function Home() {
 
   const API_URL =
     import.meta.env.VITE_API_URL;
+
+  const featuredTrackRef = useRef(null);
 
   const [products, setProducts] =
     useState([]);
@@ -115,7 +119,7 @@ const filteredProducts =
   });
 
 const featuredProducts =
-  filteredProducts.slice(0, 6);
+  filteredProducts;
 
   useEffect(() => {
 
@@ -367,7 +371,7 @@ setShowCart(
 }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="blestima-home bg-gray-100 min-h-screen">
 
       {/* NAVBAR */}
 
@@ -430,369 +434,55 @@ setShowCart(
 
 </nav>
 
-      {/* HERO */}
-
-      <section
-      className="bg-gradient-to-r from-green-700 to-green-500 text-white pt-6 pb-10 md:pt-24 md:pb-24 px-6 text-center"
->
-  <div
-  className="
-    flex
-    flex-col
-    items-center
-    mb-0
-  "
->
-
-  {settings.logoUrl && (
-
-    <img
-  src={`${import.meta.env.VITE_API_URL}${settings.logoUrl}`}
-  alt="Logo"
-  width="320"
-  height="160"
-  className="
-    h-20
-    md:h-32
-    w-auto
-    object-contain
-    rounded-3xl
-    shadow-xl
-    bg-white
-    p-3
-    mb-4
-  "
-/>
-
-  )}
-
-  <h2
- className="
-  text-3xl
-  md:text-5xl
-  font-bold
-  mb-1
-  px-4
-  leading-tight
-"
->
-
-  Blestima ColdRoom & Frozen Foods
-  </h2>
-
-</div>
-
-  <p
-  className="
-    text-xs
-    md:text-lg
-    max-w-lg
-    mx-auto
-    mb-0
-    text-white
-    px-4
-    leading-4
-  "
->
-   Fresh frozen foods,
-delivered to your doorstep.
-  </p>
-
- <section
-  className="
-    relative
-    w-screen
-    -mx-6
-    mt-6
-    md:mt-10
-    h-[400px]
-    md:h-[650px]
-    overflow-hidden
-  "
-
->
-
- {settings.storefrontImageUrl && (
-  <img
-  src={`${import.meta.env.VITE_API_URL}${settings.storefrontImageUrl}`}
-  alt="Store Frontage"
-  width="1200"
-  height="800"
-  fetchPriority="high"
-  decoding="async"
-  className="
-    absolute
-    inset-0
-    w-full
-    h-full
-    object-cover
-    scale-155
-    md:scale-100
-  "
-/>
-)}
-
-  <div
-  className="
-    absolute
-    inset-0
-    bg-black/60
-    flex
-    items-center
-    justify-center
-    px-6
-  "
-
->
-
-    <div
-  className="
-    max-w-5xl
-    mx-auto
-    text-center
-    text-white
-    px-10
-  "
->
-
-      <h2
-  className="
-    text-base
-    md:text-3xl
-    font-semibold
-    mb-3
-  "
-
->
-  About Us
-</h2>
-
-     <p
- 
- className="
-  text-sm
-  md:text-xl
-  leading-6
-  md:leading-8
-  max-w-sm
-  md:max-w-3xl
-  mx-auto
-  px-4
-  font-light
-"
->
-  Blestima ColdRoom & Frozen Foods is your trusted source for quality frozen foods, offering fresh, affordable, and hygienically handled products for homes, restaurants, and businesses.
-</p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section
-  className="
-    bg-white
-    py-8
-    md:py-16
-    px-4
-    md:px-10
-  "
->
-  <div
-    className="
-      max-w-5xl
-      mx-auto
-    "
-  >
-    <h2
-      className="
-    text-2xl
-    md:text-3xl
-    font-bold
-    text-green-700
-    text-center
-    mb-6
-    font-Cinzel
-  "
-    >
-      Our Story
-    </h2>
-
-    <p
-      className="
-        text-sm
-        md:text-lg
-        leading-7
-        md:leading-9
-        text-gray-700
-        text-left
-      "
-    >
-      {settings.aboutText}
-    </p>
-  </div>
-</section>
-
-<section
-  className="
-    py-12
-    bg-white
-    w-screen
-    -mx-6
-  "
->
-
-  <div
-      className="
-    w-full
-    px-6
-  "
-  >
-
-    <div
-  className="
-    w-full
-    bg-gray-50
-    rounded-2xl
-    shadow-md
-    p-4
-md:p-8
-    flex
-    flex-col
-    justify-start
-    items-start
-  "
-      
-    >
-
-      <div
-  className="
-    flex
-    items-center
-    gap-2
-    mb-2
-  "
->
- <HiMapPin
-  className="
-    text-red-500
-    text-lg
-  "
-  />
-
-  <p
-    className="
-      text-green-700
-      font-bold
-      text-xs
-      md:text-sm
-      uppercase
-      tracking-wider
-    "
-  >
-    Our Store Address
-  </p>
-</div>
-
-      <p
-  className="
-    text-gray-800
-    text-sm
-    md:text-xl
-    leading-relaxed
-    md:leading-8
-    ml-6
-    md:ml-0
-"
-      >
-        {settings.address}
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-{/* PROMOTIONAL BANNER */}
-
-{settings.bannerUrl && (
-
-  <section
-  className="
-    bg-white
-    py-6
-    md:py-6
-    w-screen
-    -mx-6
-    mt-8
-    md:mt-12
-  "
-  >
-
-    <h2
-  className="
-    text-center
-    text-bg
-    md:text-4xl
-    font-bold
-    text-red-600
-    mb-0
-    md:mb-4
-  "
-
-    >
-      Special Offers
-    </h2>
-
-    <div
-    
-  className="
-    w-[95%]
-    md:w-[85%]
-    mx-auto
-    overflow-hidden
-    rounded-xl
-    md:rounded-2xl
-    shadow-xl
-  "
-    >
-
-     <img
-  src={
-    settings.bannerUrl
-      ? settings.bannerUrl.startsWith("http")
-        ? settings.bannerUrl
-        : `${import.meta.env.VITE_API_URL}${settings.bannerUrl}`
-      : undefined
-  }
-  alt="Promotional Banner"
-  className="
-    w-full
-    md:w-[75%]
-    lg:w-[65%]
-    h-auto
-    aspect-[1374/1145]
-    object-contain
-    block
-    mx-auto
-"
-
-      />
-
-    </div>
-
-  </section>
-
-)}
-
-</section>
+      {/* PREMIUM STOREFRONT HERO — visual refresh; uses existing settings and routes */}
+      <section className="bl-hero" aria-label="Welcome to Blestima">
+        <div className="bl-hero-inner">
+          <div className="bl-hero-copy">
+            <span className="bl-kicker"><span className="bl-live-dot" /> FRESHNESS YOU CAN COUNT ON</span>
+            {settings.logoUrl && <img className="bl-hero-logo" src={settings.logoUrl.startsWith("http") ? settings.logoUrl : `${API_URL}${settings.logoUrl}`} alt="Blestima logo" />}
+            <h2>Quality frozen foods, <em>made easy.</em></h2>
+            <p>Stock your kitchen with quality frozen foods for your home, restaurant or business. Browse our selection and order with confidence.</p>
+            <div className="bl-hero-actions">
+              <a className="bl-btn-primary" href="#products">Explore our products <span aria-hidden="true">↗</span></a>
+              <Link className="bl-btn-outline" to="/catalog">Shop full catalog <span aria-hidden="true">→</span></Link>
+            </div>
+            <div className="bl-hero-trust" aria-label="Why shop with us">
+              <span><b>✓</b> Hygienically handled</span><span><b>✓</b> Quality selection</span><span><b>✓</b> Convenient ordering</span>
+            </div>
+          </div>
+          <div className="bl-hero-visual">
+            {settings.storefrontImageUrl ? (
+              <img src={settings.storefrontImageUrl.startsWith("http") ? settings.storefrontImageUrl : `${API_URL}${settings.storefrontImageUrl}`} alt="Blestima cold room storefront" fetchPriority="high" decoding="async" />
+            ) : (
+              <div className="bl-hero-placeholder" aria-label="Blestima frozen foods">BL<span>ESTIMA</span><small>COLDROOM & FROZEN FOODS</small></div>
+            )}
+            <div className="bl-hero-visual-badge"><span aria-hidden="true">❄</span><div><strong>Freshly selected</strong><small>From our cold room to you</small></div></div>
+          </div>
+        </div>
+      </section>
+      <div className="bl-value-strip" aria-label="Our commitment">
+        <div><span aria-hidden="true">❄</span><p><strong>Quality frozen foods</strong><small>Carefully handled products</small></p></div>
+        <div><span aria-hidden="true">◈</span><p><strong>For every kitchen</strong><small>Homes, restaurants & businesses</small></p></div>
+        <div><span aria-hidden="true">↗</span><p><strong>Simple ordering</strong><small>Choose your items, then checkout</small></p></div>
+      </div>
+      <section className="bl-story-section">
+        <div className="bl-story-inner">
+          <div><span className="bl-section-kicker">GET TO KNOW US</span><h2>Good food starts with <em>great care.</em></h2></div>
+          <div><p>{settings.aboutText || "Blestima ColdRoom & Frozen Foods is your trusted source for quality frozen foods, offering fresh, affordable, and hygienically handled products for homes, restaurants, and businesses."}</p>
+          {settings.address && <p className="bl-story-address"><HiMapPin aria-hidden="true" /> {settings.address}</p>}</div>
+        </div>
+      </section>
+      {settings.bannerUrl && (
+        <section className="bl-promo-section" aria-label="Special offers">
+          <div className="bl-section-heading"><span className="bl-section-kicker">JUST FOR YOU</span><h2>Special offers</h2></div>
+          <img src={settings.bannerUrl.startsWith("http") ? settings.bannerUrl : `${API_URL}${settings.bannerUrl}`} alt="Current Blestima promotional offer" loading="lazy" decoding="async" />
+        </section>
+      )}
       {/* PRODUCTS */}
 
       <section
         id="products"
-        className="p-6"
+        className="bl-featured-section p-6"
       >
 
         <h2
@@ -804,7 +494,7 @@ md:p-8
     mb-6
   "
 >
-  Our Products
+  Fresh picks for you
 </h2>
 
 <div
@@ -817,6 +507,13 @@ md:p-8
 
 </div>
 
+        <div className="bl-carousel-toolbar">
+          <div><span className="bl-carousel-eyebrow">THE BLESTIMA SELECTION</span><p>Browse our featured frozen foods</p></div>
+          <div className="bl-carousel-controls">
+            <button type="button" aria-label="Previous products" onClick={() => featuredTrackRef.current?.scrollBy({left: -featuredTrackRef.current.clientWidth, behavior: "smooth"})}>‹</button>
+            <button type="button" aria-label="Next products" onClick={() => featuredTrackRef.current?.scrollBy({left: featuredTrackRef.current.clientWidth, behavior: "smooth"})}>›</button>
+          </div>
+        </div>
         <div
   className="
     flex
@@ -841,9 +538,10 @@ md:p-8
 
     <button
       key={cat}
-      onClick={() =>
-        setSelectedCategory(cat)
-      }
+      onClick={() => {
+        setSelectedCategory(cat);
+        featuredTrackRef.current?.scrollTo({left: 0, behavior: "smooth"});
+      }}
       className={
         selectedCategory === cat
           ? "bg-green-600 text-white px-4 py-2 rounded-full transition-all duration-200"
@@ -857,16 +555,7 @@ md:p-8
 
 </div>
 
-<div
-  className="
-    grid
-    grid-cols-2
-    md:grid-cols-3
-    lg:grid-cols-4
-    gap-4
-    md:gap-6
-  "
->
+<div ref={featuredTrackRef} className="bl-featured-track" role="region" aria-label="Featured products" tabIndex={0}>
          
          {featuredProducts.map((product) => (
         
@@ -878,6 +567,7 @@ md:p-8
 }}
         
  className="
+    bl-product-card
     bg-white
     rounded-xl
     shadow-md
@@ -890,7 +580,7 @@ md:p-8
   "
 >
 
-          <div className="overflow-hidden relative">
+          <div className="bl-product-image overflow-hidden relative">
 
  <img
   src={
@@ -987,6 +677,7 @@ md:p-8
 
 <div
   className="
+  bl-product-body
   p-1
   md:p-5
 "
@@ -1154,7 +845,7 @@ font-semibold
   duration-200
 "
   >
-    More Products 
+    View all products →
   </Link>
 
 </div>
@@ -1178,296 +869,59 @@ font-semibold
       </section>
 
       {/* WHY CHOOSE US */}
-
-      <section className="bg-white py-6 px-3 md:py-4 md:px-6 mt-0">
-        <h2 className="
-  text-1x1
-  md:text-3xl
-  font-bold
-  text-center
-  mb-4
-  md:mb-12
-">
-          Why Choose {settings.businessName}?
-        </h2>
-
-       <div
-  className="
-    grid
-    grid-cols-1
-    md:grid-cols-3
-    gap-6
-    text-center
-  "
->
-          <div className="flex flex-col items-center">
-
-            <h3
-  className="
-    text-sm
-    md:text-2xl
-    font-bold
-  "
->
-  Quality Products
-</h3>
-
-            <p
-  className="
-    text-xs
-    md:text-lg
-  "
->
-  Fresh and hygienically handled frozen foods.
-</p>
-
+      <section className="bl-why-section" aria-labelledby="bl-why-title">
+        <div className="bl-lower-container">
+          <div className="bl-lower-heading">
+            <span className="bl-lower-eyebrow">THE BLESTIMA PROMISE</span>
+            <h2 id="bl-why-title">Good food. Great service. <em>Every time.</em></h2>
+            <p>Thoughtful service and carefully handled frozen foods for everyday cooking.</p>
           </div>
-
-          <div className="flex flex-col items-center">
-
-
-           <h3  className="
-    text-sm
-    md:text-2xl
-    font-bold
-  ">
-            Affordable Prices
-            </h3>
-
-            <p
- className="
-    text-xs
-    md:text-lg
-  ">Fair prices and excellent customer service 
-</p>
-
+          <div className="bl-benefits-grid">
+            <article className="bl-benefit"><span className="bl-benefit-icon" aria-hidden="true">❄</span><span className="bl-benefit-num">01 / QUALITY</span><h3>Quality frozen foods</h3><p>Carefully selected and hygienically handled products for your kitchen.</p></article>
+            <article className="bl-benefit"><span className="bl-benefit-icon" aria-hidden="true">₦</span><span className="bl-benefit-num">02 / VALUE</span><h3>Fair, transparent prices</h3><p>Clear product pricing and a selection to suit different shopping needs.</p></article>
+            <article className="bl-benefit"><span className="bl-benefit-icon" aria-hidden="true">↗</span><span className="bl-benefit-num">03 / CONVENIENCE</span><h3>Easy ordering</h3><p>Browse our products, add what you need to your cart, and check out with ease.</p></article>
           </div>
-
-          <div className="flex flex-col items-center">
-
-
-           <h3  className="
-    text-sm
-    md:text-2xl
-    font-bold
-  ">
-            Fast Delivery
-            </h3>
-
-           <p className="
-    text-xs
-    md:text-lg
-  ">
-convenient ordering options and delivery
-  .
-</p>
-
-          </div>
-
         </div>
-
       </section>
 
-      {/* CONTACT */}
-
-      {/* CONTACT */}
-
-<section
-  className="
-    bg-green-400
-    text-white
-    py-0
-    px-0
-    text-center
-  "
-
->
-
-<section
- className="
-  bg-gradient-to-b
-  from-sky-500
-  to-sky-100
-  py-4
-  md:py-3
-  px-0
-"
->
-
-  <div
-  
-  className="
-    max-w-6xl
-    mx-auto
-    flex
-    justify-center
-  "
-
-  >
-<img
-  src="/images/blestima-delivery-banner.webp"
-  alt="Blestima Delivery Service"
-  width="800"
-  height="610"
-  className="
-    mx-auto
-    md:w-[80%]
-    md:rounded-3xl
-    md:overflow-hidden
-    md:shadow-2xl
-  "
-    />
-
-  </div>
-
-</section>
+      {/* DELIVERY / SHOPPING CTA */}
+      <section className="bl-lower-showcase">
+      <section className="bl-delivery-section" aria-labelledby="bl-delivery-title">
+        <div className="bl-delivery-inner">
+          <div className="bl-delivery-copy">
+            <span className="bl-lower-eyebrow">SHOP WITH CONFIDENCE</span>
+            <h2 id="bl-delivery-title">Your favourites, <em>one easy order away.</em></h2>
+            <p>From fish and seafood to chicken and more, find the frozen foods you need in one place.</p>
+            <Link to="/catalog" className="bl-delivery-link">Browse the full catalog <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className="bl-delivery-image">
+            <img src="/images/blestima-delivery-banner.webp" alt="Blestima frozen foods delivery illustration" loading="lazy" width="800" height="610" />
+          </div>
+        </div>
+      </section>
 
 {/* TESTIMONIALS */}
-
-<section
-   className="
-    bg-gray-50
-    py-6
-    px-4
-  "
->
-<h2
-  className="
-    text-lg
-    md:text-2xl
-    font-bold
-    text-center
-    text-gray-800
-    mb-4
-  "
-  >
-    What Our Customers Say:
-  </h2>
-
-  <div
-    className="
-      grid
-grid-cols-1
-md:grid-cols-3
-gap-6
-    "
-  >
-
-    <div
-
-  className="
-    bg-white
-    p-3
-    md:p-8
-    rounded-lg
-    shadow-sm
-    md:min-h-[180px]
-    md:flex
-    md:flex-col
-    md:justify-center
-  "
-
-
-    >
-      <p
-  className="
-    text-gray-700
-    text-sm
-    md:text-base
-  "
->
-        Fresh products and excellent customer service.
-        Delivery was fast and reliable.
-      </p>
-
-      <h4
-  className="
-    text-sm
-    md:text-bg
-    text-green-700
-  "
->
-        — Adetomiwa Oluwadamilola
-      </h4>
+<section className="bl-testimonials" aria-labelledby="bl-reviews-title">
+  <div className="bl-reviews-container">
+    <header className="bl-reviews-heading">
+      <span className="bl-reviews-eyebrow">CUSTOMER STORIES</span>
+      <h2 id="bl-reviews-title">Kind words from <em>our customers.</em></h2>
+      <p>Hear what shoppers have shared about their Blestima experience.</p>
+    </header>
+    <div className="bl-reviews-grid">
+      {[
+        {quote: "Fresh products and excellent customer service. Delivery was fast and reliable.", name: "Adetomiwa Oluwadamilola"},
+        {quote: "The fish and chicken were fresh and neatly packaged. Highly recommended.", name: "Febisara O."},
+        {quote: "Affordable prices and great quality. I will definitely order again.", name: "Progress Ifeanyi"},
+      ].map((review, index) => (
+        <article className="bl-review-card" key={review.name}>
+          <div className="bl-review-top"><span className="bl-review-quote-mark" aria-hidden="true">“</span><span className="bl-review-number">0{index + 1} / 03</span></div>
+          <blockquote>{review.quote}</blockquote>
+          <div className="bl-review-author"><span className="bl-review-avatar" aria-hidden="true">{review.name.charAt(0)}</span><span className="bl-review-author-text"><strong>{review.name}</strong><small>Customer feedback</small></span></div>
+        </article>
+      ))}
     </div>
-
-    <div
-  className="
-    bg-white
-    p-3
-    md:p-8
-    rounded-lg
-    shadow-sm
-    md:min-h-[180px]
-    md:flex
-    md:flex-col
-    md:justify-center
-  "
-
-    >
-      
-      <p
-  className="
-    text-gray-700
-    text-sm
-    md:text-base
-  
-  ">
-        The fish and chicken were fresh and neatly packaged.
-        Highly recommended.
-      </p>
-
-    <h4
-  className="
-    text-sm
-    md:text-bg
-    text-green-700
-  "
->
-        — Febisara O.
-      </h4>
-    </div>
-
-    <div
-  className="
-    bg-white
-    p-3
-    md:p-8
-    rounded-lg
-    shadow-sm
-    md:min-h-[180px]
-    md:flex
-    md:flex-col
-    md:justify-center
-  "
-
-    >
-      
-      <p
-  className="
-    text-gray-700
-    text-sm
-    md:text-base
-  "
->
-        Affordable prices and great quality.
-        I will definitely order again.
-      </p>
-
-      <h4
-  className="
-    text-sm
-    md:text-bg
-    text-green-700
-  "
-
->
-        — Progress Ifeanyi
-      </h4>
-    </div>
-
   </div>
-
 </section>
 
 </section>
@@ -2044,168 +1498,37 @@ gap-6
       <ChatBot />
 
 {/* FOOTER */}
-
-<footer
-  className="
-    bg-gray-900
-    text-white
-    py-6
-    md:py-12
-    px-4
-    md:px-8
-  "
-
->
-
-  <div
-    className="
-      max-w-6xl
-      mx-auto
-      grid
-      grid-cols-1
-      md:grid-cols-3
-      gap-4
-    "
-  >
-
-    <div>
-
-      <h3
-  className="
-    text-sm
-    md:text-2xl
-    font-lg
-    mb-2
-    md:mb-4
-  "
-      >
-        Blestima ColdRoom & Frozen Foods
-      </h3>
-
-      <p 
-  className="
-    text-xs
-    md:text-base
-    text-gray-300
-    leading-2
-    md:leading-5
-  "
->
-        Premium frozen foods delivered fresh and affordable.
-      </p>
-
+<footer className="bl-footer">
+  <div className="bl-footer-inner">
+    <div className="bl-footer-brand">
+      <span className="bl-footer-kicker">BLESTIMA COLDROOM</span>
+      <h2>Fresh choices.<br/><em>Better everyday meals.</em></h2>
+      <p>Blestima ColdRoom &amp; Frozen Foods — quality frozen foods for homes, restaurants, and businesses.</p>
+      <Link to="/catalog" className="bl-footer-shop">Explore our products <span aria-hidden="true">↗</span></Link>
     </div>
-
-    <div>
-
-      <h3
-       className="
-  text-sm
-  md:text-xl
-  text-gray-300
-  leading-5
-">
-      
-        Call:
-      </h3>
-
-<p
-  className="
-    text-sm
-    md:text-lg
-    font-medium
-  "
->
-  +{settings.whatsappNumber}
-</p>
-
+    <div className="bl-footer-column">
+      <h3>Explore</h3>
+      <a href="#products">Featured products</a>
+      <Link to="/catalog">Full catalog</Link>
+      <a href="#bl-why-title">Why Blestima</a>
     </div>
-
-    <div>
-
-      <h3
-       className="
-  text-sm
-  md:text-xl
-  text-gray-300
-  leading-5
-  mb-2
-">
-        Click To Follow Us On:
-      </h3>
-
-     <div
-  className="
-    flex
-    gap-4
-    md:gap-6
-    items-center
-  "
->
-
-  <a
-    href={settings.facebook}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaFacebook
-      className="
-        text-xl
-        md:text-3xl
-        hover:text-blue-500
-      "
-    />
-  </a>
-
-  <a
-    href={settings.instagram}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaInstagram
-      className="
-        text-xl
-        md:text-3xl
-        hover:text-pink-500
-      "
-    />
-  </a>
-
-  <a
-    href={settings.tiktok}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaTiktok
-      className="
-        text-xl
-        md:text-3xl
-      "
-    />
-  </a>
-
-</div>
+    <div className="bl-footer-column">
+      <h3>Get in touch</h3>
+      {settings.whatsappNumber && <a href={`https://wa.me/${settings.whatsappNumber.replace(/\\D/g, "")}`} target="_blank" rel="noopener noreferrer">WhatsApp us ↗</a>}
+      {settings.whatsappNumber && <a href={`tel:+${settings.whatsappNumber.replace(/\\D/g, "")}`}>Call +{settings.whatsappNumber}</a>}
+      {settings.address && <p>{settings.address}</p>}
     </div>
-
+    <div className="bl-footer-column">
+      <h3>Follow Blestima</h3>
+      <div className="bl-footer-social">
+        {settings.facebook && <a href={settings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook /></a>}
+        {settings.instagram && <a href={settings.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>}
+        {settings.tiktok && <a href={settings.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a>}
+      </div>
+      <p>Stay connected for product updates and special offers.</p>
+    </div>
   </div>
-
-  <div
-    className="
-      border-t
-      border-gray-700
-      mt-1
-      pt-1
-      text-center
-      text-xs
-      text-gray-400
-    "
-  >
-
-    © {new Date().getFullYear()} Blestima ColdRoom & Frozen Foods.
-    All Rights Reserved.
-
-  </div>
-
+  <div className="bl-footer-bottom"><span>© {new Date().getFullYear()} Blestima ColdRoom &amp; Frozen Foods. All rights reserved.</span><span>Freshness delivered with care.</span></div>
 </footer>
 
     </div>

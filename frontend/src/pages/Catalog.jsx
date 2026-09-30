@@ -1,3 +1,4 @@
+import "../blestimaRefresh.css";
 import ChatBot from "../components/ChatBot";
 import { trackEvent } from "../utils/analytics";
 
@@ -60,6 +61,8 @@ const [addedProduct, setAddedProduct] =
 
   const [search, setSearch] =
     useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 8;
 
   useEffect(() => {
 
@@ -427,9 +430,13 @@ setShowCart(
 
     });
 
- return (
+  const pageCount = Math.ceil(filteredProducts.length / pageSize);
+  const currentPage = Math.min(page, Math.max(1, pageCount));
+  const pagedProducts = filteredProducts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
-  <>
+  return (
+
+  <div className="blestima-catalog">
 
     <div
       className="
@@ -447,9 +454,17 @@ setShowCart(
     font-bold
   "
 >
-  Product Catalog
+  Explore our products
 </h1>
 
+       <p className="bl-catalog-subtitle">Find exactly what you need for your kitchen.</p>
+       <div className="bl-catalog-search-row">
+         <label className="bl-catalog-search">
+           <span aria-hidden="true">⌕</span>
+           <input type="search" value={search} placeholder="Search products (e.g. chicken, fish...)" aria-label="Search products" onChange={(e) => { setSearch(e.target.value); setPage(1); }} />
+         </label>
+         <span className="bl-catalog-result-count">{filteredProducts.length} products</span>
+       </div>
 <div
   className="
     flex
@@ -492,11 +507,7 @@ setShowCart(
 
             <button
               key={cat}
-              onClick={() =>
-                setSelectedCategory(
-                  cat
-                )
-              }
+              onClick={() => { setSelectedCategory(cat); setPage(1); }}
               className={
                 selectedCategory ===
 cat
@@ -523,7 +534,7 @@ cat
   " 
       >
 
-        {filteredProducts.map(
+        {pagedProducts.map(
           (product) => (
 
         <div
@@ -554,6 +565,7 @@ cat
 
 }}
   className="
+    bl-product-card
     bg-white
     rounded-xl
     shadow-md
@@ -566,7 +578,7 @@ cat
   "
 >
 
-  <div className="overflow-hidden relative">
+  <div className="bl-product-image overflow-hidden relative">
 
     <img
      src={
@@ -617,6 +629,7 @@ cat
 
   <div
    className="
+  bl-product-body
   p-2
   md:p-5
 "
@@ -760,9 +773,20 @@ cat
           )
         )}
 
-      </div>
+       </div>
+       {filteredProducts.length === 0 && <p className="bl-catalog-empty">No products match your search. Try another category or search term.</p>}
+       {pageCount > 1 && (
+         <nav className="bl-catalog-pagination" aria-label="Product pages">
+           <button type="button" disabled={currentPage === 1} onClick={() => setPage(p => Math.max(1, p - 1))} aria-label="Previous page">‹</button>
+           {Array.from({length: pageCount}, (_, i) => i + 1).map(number => (
+             <button key={number} type="button" className={number === currentPage ? "is-current" : ""} aria-label={`Page ${number}`} aria-current={number === currentPage ? "page" : undefined} onClick={() => setPage(number)}>{number}</button>
+           ))}
+           <button type="button" disabled={currentPage === pageCount} onClick={() => setPage(p => Math.min(pageCount, p + 1))} aria-label="Next page">›</button>
+         </nav>
+       )}
+       {filteredProducts.length > 0 && <p className="bl-catalog-page-summary">Showing {(currentPage - 1) * pageSize + 1}–{Math.min(currentPage * pageSize, filteredProducts.length)} of {filteredProducts.length} products</p>}
 
-    </div>
+     </div>
 
 {selectedProduct && (
 
@@ -1292,7 +1316,7 @@ cat
 </a>
 
 <ChatBot />
-  </>
+  </div>
 
   );
 

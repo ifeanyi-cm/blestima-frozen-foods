@@ -1,0 +1,263 @@
+/* Blestima visual refresh — scoped to the three existing pages. */
+.blestima-home,.blestima-catalog,.blestima-admin{--bl-green:#126344;--bl-deep:#0a4435;--bl-ink:#18362e;--bl-soft:#f3f8f4;--bl-line:#e2ebe4;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--bl-ink)}
+.blestima-home{background:#f7faf7}
+.blestima-home nav{background:linear-gradient(105deg,#0a4536 0%,#126f49 68%,#268052 100%);box-shadow:0 5px 24px #0b3b2b20;position:relative;z-index:5}
+.blestima-home nav h1{letter-spacing:-.035em}
+.blestima-home nav a,.blestima-home nav button{transition:transform .18s,background .18s,box-shadow .18s}
+.blestima-home nav a:hover,.blestima-home nav button:hover{transform:translateY(-1px)}
+.blestima-home>section:first-of-type{background:linear-gradient(130deg,#0a4637 0%,#116a47 54%,#22895c 100%);position:relative;isolation:isolate;overflow:hidden}
+.blestima-home>section:first-of-type:before{content:"";position:absolute;z-index:-1;width:440px;height:440px;border:1px solid #ffffff25;border-radius:50%;right:-130px;top:-210px;box-shadow:0 0 0 65px #ffffff07,0 0 0 130px #ffffff06;pointer-events:none}
+.blestima-home>section:first-of-type h1,.blestima-home>section:first-of-type h2{letter-spacing:-.045em}
+.blestima-home>section:first-of-type img{border-radius:22px}
+.blestima-home section{scroll-margin-top:30px}
+.blestima-home section h2{letter-spacing:-.03em}
+.blestima-home .shadow-md,.blestima-home .shadow-lg,.blestima-home .shadow-xl{box-shadow:0 12px 34px #143e2912}
+.blestima-home .rounded-xl,.blestima-home .rounded-2xl{border-radius:18px}
+.blestima-home button,.blestima-home a{transition:transform .18s,box-shadow .18s,background .18s}
+.blestima-home button:focus-visible,.blestima-home a:focus-visible{outline:3px solid #a8e7bf;outline-offset:3px}
+.blestima-home input,.blestima-home select{border-radius:11px}
+.blestima-home input:focus,.blestima-home select:focus{outline:2px solid #8fd4ac;outline-offset:1px}
+/* Catalog: maintain existing filters, cart, modals and event handlers. */
+.blestima-catalog{min-height:100vh;background:linear-gradient(180deg,#eef7f0 0,#f8fbf8 350px,#f8fbf8 100%)}
+.blestima-catalog>div:first-child{padding-top:42px}
+.blestima-catalog>div:first-child>h1{color:#104e37;font-size:clamp(26px,3.5vw,42px);letter-spacing:-.045em;margin-bottom:6px}
+.blestima-catalog>div:first-child>h1:after{content:"Fresh picks, carefully selected for you";display:block;color:#658072;font-size:13px;font-weight:500;letter-spacing:0;margin-top:8px;margin-bottom:24px}
+.blestima-catalog>div:first-child>div button{transition:transform .18s,box-shadow .18s,background .18s}
+.blestima-catalog>div:first-child>div button:hover{transform:translateY(-1px)}
+.blestima-catalog .grid>div.bg-white{border:1px solid var(--bl-line);border-radius:19px;box-shadow:0 7px 25px #0b3d2510;overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s}
+.blestima-catalog .grid>div.bg-white:hover{transform:translateY(-5px);box-shadow:0 19px 38px #0b3d2520;border-color:#a4d0b2}
+.blestima-catalog .grid>div.bg-white img{background:#f3f7f1;transition:transform .4s}
+.blestima-catalog .grid>div.bg-white:hover img{transform:scale(1.035)}
+.blestima-catalog .grid>div.bg-white h3{color:#173b2c;letter-spacing:-.025em}
+.blestima-catalog .grid>div.bg-white p{line-height:1.5}
+.blestima-catalog .grid>div.bg-white button{border-radius:11px}
+.blestima-catalog button:focus-visible,.blestima-catalog a:focus-visible{outline:3px solid #a1dcb6;outline-offset:3px}
+.blestima-catalog .fixed .bg-white{border-radius:20px;box-shadow:0 24px 75px #09261f45}
+/* Admin: visual-only, retaining product management and analytics. */
+.blestima-admin{background:#f2f7f4;padding:28px clamp(14px,3vw,40px)}
+.blestima-admin>div:first-child{background:linear-gradient(115deg,#0b4838,#146c4b 72%,#25865b);color:white;border-radius:21px;padding:25px 28px;box-shadow:0 15px 35px #0a51302a;gap:16px;position:relative;overflow:hidden}
+.blestima-admin>div:first-child:after{content:"";position:absolute;width:240px;height:240px;border:1px solid #ffffff26;border-radius:50%;right:140px;top:-150px;pointer-events:none;box-shadow:0 0 0 42px #ffffff09,0 0 0 85px #ffffff06}
+.blestima-admin>div:first-child h1{color:#fff;letter-spacing:-.045em}
+.blestima-admin>div:first-child button{position:relative;z-index:1;border-radius:11px;background:#fff;color:#a62828;font-weight:800;box-shadow:0 5px 17px #102a1c30}
+.blestima-admin>div:first-child button:hover{background:#fff1f1}
+.blestima-admin>div.bg-white{border:1px solid #e1eae3;border-radius:20px;box-shadow:0 8px 30px #0c422512;padding:clamp(16px,2.3vw,29px)}
+.blestima-admin>div.bg-white h2{color:#143d2e;letter-spacing:-.035em}
+.blestima-admin .bg-gray-50{background:#f4f8f5;border:1px solid #e6eee7;border-radius:14px}
+.blestima-admin .grid .bg-gray-50{box-shadow:0 3px 13px #1c4b2b08}
+.blestima-admin .grid .bg-gray-50 p:last-child{color:#135d42;letter-spacing:-.025em}
+.blestima-admin input:not([type=checkbox]),.blestima-admin select,.blestima-admin textarea{background:#fcfefd;border:1px solid #d8e5da;border-radius:11px;transition:border-color .15s,box-shadow .15s}
+.blestima-admin input:focus,.blestima-admin select:focus,.blestima-admin textarea:focus{outline:2px solid #9cd7b4;outline-offset:0;border-color:#369363}
+.blestima-admin button{transition:transform .16s,box-shadow .16s,background .16s}
+.blestima-admin button:not(:disabled):hover{transform:translateY(-1px)}
+.blestima-admin button:focus-visible{outline:3px solid #99dbb3;outline-offset:2px}
+.blestima-admin .bg-green-600,.blestima-admin .bg-blue-600{background:#126344}
+.blestima-admin .bg-green-600:hover,.blestima-admin .bg-blue-600:hover{background:#0b4935}
+.blestima-admin img{border-radius:12px}
+@media(max-width:640px){.blestima-home>section:first-of-type:before{width:260px;height:260px;right:-125px;top:-100px}.blestima-catalog>div:first-child{padding:24px 14px}.blestima-catalog>div:first-child>h1:after{font-size:12px}.blestima-catalog .grid{gap:12px}.blestima-admin{padding:13px}.blestima-admin>div:first-child{padding:20px 17px;border-radius:15px}.blestima-admin>div.bg-white{padding:16px;border-radius:15px}}
+@media(prefers-reduced-motion:reduce){.blestima-home *, .blestima-catalog *, .blestima-admin *{transition:none!important;animation:none!important}}
+
+/* Second-pass storefront and catalog redesign — scoped to Blestima pages. */
+.blestima-home{overflow-x:clip;background:#f7faf7}
+.blestima-home .bl-hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 95% 12%,#24775c 0%,transparent 44%),linear-gradient(120deg,#0a302b 0%,#0d4939 57%,#125b45 100%);color:#fff;padding:clamp(42px,5vw,85px) clamp(18px,4vw,60px) clamp(55px,6vw,95px);isolation:isolate}
+.blestima-home .bl-hero:before{content:"";position:absolute;z-index:-1;width:650px;height:650px;right:-210px;top:-340px;border:1px solid #ffffff16;border-radius:50%;box-shadow:0 0 0 85px #ffffff07,0 0 0 175px #ffffff04;pointer-events:none}
+.blestima-home .bl-hero-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(28px,5vw,90px)}
+.blestima-home .bl-hero-copy{text-align:left;min-width:0}
+.blestima-home .bl-kicker{display:inline-flex;align-items:center;gap:9px;border:1px solid #c5ebd038;background:#ffffff13;border-radius:100px;padding:9px 14px;font-size:11px;letter-spacing:.12em;font-weight:800;color:#c5efd6}
+.blestima-home .bl-live-dot{width:7px;height:7px;border-radius:50%;background:#a9e9a8;box-shadow:0 0 0 4px #a9e9a820}
+.blestima-home .bl-hero-logo{margin:22px 0 0;width:auto;height:67px;max-width:165px;object-fit:contain;background:#fff;border-radius:13px;padding:9px;box-shadow:0 8px 30px #001d1a35}
+.blestima-home .bl-hero-copy h2{color:white;font-size:clamp(40px,5.1vw,75px);font-weight:850;line-height:1.06;letter-spacing:-.055em;margin:25px 0 20px;max-width:680px}
+.blestima-home .bl-hero-copy h2 em,.blestima-home .bl-story-inner h2 em{font-style:normal;color:#b7e8a8}
+.blestima-home .bl-hero-copy>p{font-size:clamp(15px,1.5vw,18px);color:#d5e9df;line-height:1.8;max-width:570px}
+.blestima-home .bl-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.blestima-home .bl-hero-actions a{display:inline-flex;align-items:center;justify-content:center;gap:15px;padding:15px 23px;border-radius:13px;font-size:14px;font-weight:800;text-decoration:none}
+.blestima-home .bl-btn-primary{background:#c3e9a5;color:#163c2e;box-shadow:0 9px 28px #001c1938}
+.blestima-home .bl-btn-primary:hover{background:#e0f5cb;transform:translateY(-2px)}
+.blestima-home .bl-btn-outline{border:1px solid #ffffff65;background:#ffffff0d;color:#fff}
+.blestima-home .bl-btn-outline:hover{background:#ffffff23;transform:translateY(-2px)}
+.blestima-home .bl-hero-trust{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:36px;color:#d1e8dc;font-size:12px}
+.blestima-home .bl-hero-trust span{display:flex;align-items:center;gap:7px}
+.blestima-home .bl-hero-trust b{color:#b7e8a8;font-size:15px}
+.blestima-home .bl-hero-visual{position:relative;min-height:455px;height:min(40vw,550px);border-radius:28px;padding:9px;background:#ffffff16;border:1px solid #ffffff2c;box-shadow:0 35px 75px #001c183d;transform:rotate(1.5deg)}
+.blestima-home .bl-hero-visual>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:20px}
+.blestima-home .bl-hero-placeholder{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(135deg,#b7d9bd,#6aa58a);color:#0d4939;font-weight:900;font-size:42px;letter-spacing:-.04em;border-radius:20px}.blestima-home .bl-hero-placeholder span{color:#fff}.blestima-home .bl-hero-placeholder small{font-size:11px;letter-spacing:.15em;margin-top:8px}
+.blestima-home .bl-hero-visual-badge{position:absolute;bottom:28px;left:-33px;display:flex;align-items:center;gap:13px;background:white;color:#153c2e;padding:15px 18px;border-radius:15px;box-shadow:0 14px 34px #001c1835;transform:rotate(-1.5deg)}
+.blestima-home .bl-hero-visual-badge>span{font-size:27px;color:#25885c}.blestima-home .bl-hero-visual-badge strong,.blestima-home .bl-hero-visual-badge small{display:block}.blestima-home .bl-hero-visual-badge strong{font-size:13px}.blestima-home .bl-hero-visual-badge small{color:#6e8276;font-size:11px;margin-top:3px}
+.blestima-home .bl-value-strip{position:relative;z-index:1;max-width:1150px;margin:-35px auto 0;padding:22px 32px;background:#fff;box-shadow:0 17px 50px #0c392a17;border:1px solid #e6efe8;border-radius:19px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.blestima-home .bl-value-strip>div{display:flex;align-items:center;gap:13px;padding:6px 12px}.blestima-home .bl-value-strip>div+div{border-left:1px solid #e6eee7}.blestima-home .bl-value-strip>div>span{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;border-radius:12px;background:#edf7ee;color:#186746;font-size:24px}.blestima-home .bl-value-strip p{margin:0}.blestima-home .bl-value-strip strong,.blestima-home .bl-value-strip small{display:block}.blestima-home .bl-value-strip strong{font-size:13px;color:#174432}.blestima-home .bl-value-strip small{font-size:11px;color:#71867b;margin-top:3px}
+.blestima-home .bl-story-section{padding:100px 24px 85px;background:#f7faf7}.blestima-home .bl-story-inner{max-width:1120px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.blestima-home .bl-section-kicker{display:block;font-size:11px;font-weight:850;letter-spacing:.18em;color:#28855a;margin-bottom:12px}.blestima-home .bl-story-inner h2{font-size:clamp(29px,3.7vw,52px);line-height:1.16;letter-spacing:-.045em;color:#123e30;font-weight:850}.blestima-home .bl-story-inner h2 em{color:#399465}.blestima-home .bl-story-inner p{color:#546c5e;font-size:16px;line-height:1.9}.blestima-home .bl-story-address{display:flex;gap:8px;align-items:flex-start;margin-top:17px;font-size:13px!important;color:#1c6c47!important}.blestima-home .bl-story-address svg{flex:0 0 auto;margin-top:4px}
+.blestima-home .bl-promo-section{padding:25px 24px 65px;text-align:center;background:#f7faf7}.blestima-home .bl-promo-section h2{font-size:clamp(25px,3vw,38px);font-weight:800;color:#173d2c;margin-bottom:25px}.blestima-home .bl-promo-section img{max-width:850px;width:100%;max-height:440px;object-fit:contain;margin:auto;border-radius:19px;box-shadow:0 14px 40px #123f2616}
+.blestima-home .bl-featured-section{max-width:1320px;margin:auto;padding:60px 24px 80px;background:#f7faf7}.blestima-home .bl-featured-section>h2{font-size:clamp(27px,3vw,42px);color:#164633;font-weight:850;letter-spacing:-.045em}.blestima-home .bl-featured-section>h2:before{content:"THE BLESTIMA SELECTION";display:block;color:#2e8a59;letter-spacing:.18em;font-size:11px;font-weight:850;margin-bottom:12px}.blestima-home .bl-featured-section>div:nth-of-type(1){display:none}
+.blestima-home .bl-product-card,.blestima-catalog .bl-product-card{border:1px solid #e2ebe4!important;border-radius:20px!important;box-shadow:0 8px 26px #153e2510!important;overflow:hidden;display:flex;flex-direction:column;background:#fff;transition:transform .2s,box-shadow .2s!important}
+.blestima-home .bl-product-card:hover,.blestima-catalog .bl-product-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px #153e2520!important}
+.blestima-home .bl-product-image,.blestima-catalog .bl-product-image{background:#edf4ee;overflow:hidden}.blestima-home .bl-product-image img,.blestima-catalog .bl-product-image img{width:100%;aspect-ratio:1.12/1;height:auto;object-fit:cover;transition:transform .35s}.blestima-home .bl-product-card:hover .bl-product-image img,.blestima-catalog .bl-product-card:hover .bl-product-image img{transform:scale(1.04)}
+.blestima-home .bl-product-body,.blestima-catalog .bl-product-body{padding:18px!important;flex:1;display:flex;flex-direction:column;gap:5px}.blestima-home .bl-product-body h3,.blestima-catalog .bl-product-body h3{font-size:clamp(15px,1.5vw,19px);line-height:1.35;font-weight:800;color:#173b2a;min-height:2.5em}.blestima-home .bl-product-body>p,.blestima-catalog .bl-product-body>p{font-size:12px;color:#76867c;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}.blestima-home .bl-product-body>div:last-child,.blestima-catalog .bl-product-body>div:last-child{margin-top:auto;padding-top:10px}.blestima-home .bl-product-body span.text-green-700,.blestima-catalog .bl-product-body span.text-green-700{font-size:20px;font-weight:850;letter-spacing:-.03em}.blestima-home .bl-product-body button,.blestima-catalog .bl-product-body button{width:100%;min-height:41px;border-radius:11px!important;font-weight:800}
+.blestima-catalog{background:linear-gradient(180deg,#edf7f0,#f9fbf9 450px);min-height:100vh}.blestima-catalog>div:first-child{padding-top:50px}.blestima-catalog>div:first-child>h1{font-size:clamp(30px,4vw,50px);font-weight:850;letter-spacing:-.05em;color:#144934}.blestima-catalog>div:first-child>h1:before{content:"BLESTIMA COLDROOM";display:block;color:#328d5e;letter-spacing:.17em;font-size:11px;font-weight:850;margin-bottom:10px}.blestima-catalog>div:first-child>h1:after{content:"Explore our range of quality frozen foods";display:block;color:#687e70;font-size:15px;font-weight:500;letter-spacing:0;margin-top:10px;margin-bottom:25px}.blestima-catalog>div:first-child>div button{border-radius:12px}.blestima-catalog>div:first-child>div:nth-of-type(2) button{border-radius:100px;box-shadow:0 2px 8px #113c2410}
+@media(max-width:850px){.blestima-home .bl-hero-inner{grid-template-columns:1fr;gap:36px}.blestima-home .bl-hero-visual{height:410px;min-height:0;transform:none}.blestima-home .bl-hero-visual-badge{left:15px;bottom:18px;transform:none}.blestima-home .bl-value-strip{margin:-20px 18px 0;padding:16px;gap:0}.blestima-home .bl-value-strip>div{padding:7px}.blestima-home .bl-story-inner{gap:20px}}
+@media(max-width:600px){.blestima-home .bl-hero{padding:43px 20px 65px}.blestima-home .bl-hero-copy h2{font-size:clamp(37px,10vw,51px);margin:20px 0 15px}.blestima-home .bl-hero-copy>p{font-size:14px}.blestima-home .bl-hero-actions a{padding:13px 16px;font-size:12px}.blestima-home .bl-hero-trust{margin-top:24px;gap:8px 12px;font-size:11px}.blestima-home .bl-hero-visual{height:285px;border-radius:19px}.blestima-home .bl-hero-visual>img{border-radius:12px}.blestima-home .bl-hero-visual-badge{padding:9px 12px}.blestima-home .bl-value-strip{grid-template-columns:1fr;gap:0;margin:-22px 15px 0}.blestima-home .bl-value-strip>div+div{border-left:0;border-top:1px solid #e6eee7}.blestima-home .bl-story-section{padding:65px 20px 45px}.blestima-home .bl-story-inner{grid-template-columns:1fr;gap:20px}.blestima-home .bl-story-inner p{font-size:14px}.blestima-home .bl-featured-section{padding:45px 14px 60px}.blestima-home .bl-product-body,.blestima-catalog .bl-product-body{padding:12px!important}.blestima-home .bl-product-body span.text-green-700,.blestima-catalog .bl-product-body span.text-green-700{font-size:17px}.blestima-home .bl-product-body button,.blestima-catalog .bl-product-body button{font-size:12px}.blestima-catalog>div:first-child{padding:30px 14px}}
+
+
+/* Third-pass refresh: featured products through footer */
+.blestima-home .bl-featured-section{padding-top:88px;padding-bottom:96px}
+.blestima-home .bl-featured-section>h2{font-size:clamp(32px,3.7vw,52px);margin-bottom:26px}
+
+
+
+
+
+
+.blestima-home .bl-featured-section .bl-product-card .bg-green-600{background:#0b9852}
+.blestima-home .bl-featured-section a[href="/catalog"]{display:inline-flex;align-items:center;gap:10px;padding:14px 23px;border-radius:13px;background:#145a41;font-weight:800;box-shadow:0 8px 23px #0c492526}
+.blestima-home .bl-featured-section a[href="/catalog"]:after{content:"↗";font-size:19px;line-height:1}
+.blestima-home .bl-why-section{background:#eef6ef;padding:90px 24px 100px}
+.blestima-home .bl-lower-container{max-width:1240px;margin:auto}
+.blestima-home .bl-lower-heading{text-align:center;max-width:680px;margin:0 auto 46px}
+.blestima-home .bl-lower-eyebrow{font-size:11px;font-weight:850;letter-spacing:.2em;color:#2b8858}
+.blestima-home .bl-lower-heading h2{color:#143e2e;font-size:clamp(31px,3.6vw,49px);line-height:1.15;letter-spacing:-.045em;font-weight:850;margin:14px 0}
+.blestima-home .bl-lower-heading h2 em,.blestima-home .bl-delivery-copy h2 em,.blestima-home .bl-footer-brand h2 em{font-style:normal;color:#318b60}
+.blestima-home .bl-lower-heading p{color:#687c70;line-height:1.8;font-size:15px}
+.blestima-home .bl-benefits-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.blestima-home .bl-benefit{background:#fff;border:1px solid #dfebe1;border-radius:22px;padding:35px 32px 38px;box-shadow:0 14px 42px #154a2810;transition:transform .2s,box-shadow .2s}
+.blestima-home .bl-benefit:hover{transform:translateY(-4px);box-shadow:0 24px 46px #154a2820}
+.blestima-home .bl-benefit-icon{display:grid;place-items:center;width:62px;height:62px;border-radius:18px;background:#e8f6ea;color:#126a47;font-size:30px;font-weight:800;margin-bottom:29px}
+.blestima-home .bl-benefit-num{display:block;color:#389563;font-size:10px;font-weight:850;letter-spacing:.16em;margin-bottom:10px}
+.blestima-home .bl-benefit h3{font-size:22px;font-weight:850;letter-spacing:-.03em;color:#153e2d;margin-bottom:12px}
+.blestima-home .bl-benefit p{font-size:14px;line-height:1.85;color:#637b6b}
+.blestima-home .bl-delivery-section{padding:90px 24px;background:linear-gradient(115deg,#0a342c,#135d46);overflow:hidden}
+.blestima-home .bl-delivery-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+.blestima-home .bl-delivery-copy .bl-lower-eyebrow{color:#b8e9ba}
+.blestima-home .bl-delivery-copy h2{font-size:clamp(34px,4vw,58px);line-height:1.11;letter-spacing:-.05em;color:#fff;font-weight:850;margin:17px 0 22px}
+.blestima-home .bl-delivery-copy h2 em{color:#bce6a5}
+.blestima-home .bl-delivery-copy p{color:#cfe3d7;line-height:1.85;font-size:16px;max-width:490px}
+.blestima-home .bl-delivery-link{display:inline-flex;align-items:center;gap:16px;background:#c4eaa8;color:#123d2c;border-radius:13px;padding:15px 22px;margin-top:28px;font-weight:850;font-size:14px;text-decoration:none}
+.blestima-home .bl-delivery-link:hover{background:#e0f5ce;transform:translateY(-2px)}
+.blestima-home .bl-delivery-image{border:1px solid #ffffff35;padding:10px;background:#ffffff14;border-radius:28px;box-shadow:0 30px 70px #041c1740}
+.blestima-home .bl-delivery-image img{display:block;width:100%;max-height:490px;object-fit:contain;border-radius:19px;background:#e3f4ff}
+.blestima-home .bl-testimonials{background:#f8fbf8;padding:92px 24px 110px}
+.blestima-home .bl-testimonials>h2{font-size:clamp(30px,3.3vw,45px);letter-spacing:-.045em;color:#153e2d;font-weight:850;margin-bottom:42px}
+.blestima-home .bl-testimonials>h2:before{content:"REAL EXPERIENCES";display:block;color:#308b5b;letter-spacing:.18em;font-size:11px;font-weight:850;margin-bottom:12px}
+.blestima-home .bl-testimonials>div{max-width:1240px;margin:auto;gap:20px}
+.blestima-home .bl-testimonials>div>div{min-height:245px;border-radius:21px;background:#fff;border:1px solid #e0eae2;box-shadow:0 12px 32px #133c2610;padding:34px!important;align-items:flex-start;text-align:left;justify-content:space-between;transition:transform .2s}
+.blestima-home .bl-testimonials>div>div:hover{transform:translateY(-4px)}
+.blestima-home .bl-review-stars{color:#e5a839;letter-spacing:.15em;font-size:19px;margin-bottom:17px}
+.blestima-home .bl-testimonials>div>div:has(.bl-review-stars):before{display:none}
+.blestima-home .bl-testimonials>div>div p{font-size:15px;line-height:1.9;color:#3d5749}
+.blestima-home .bl-testimonials>div>div h4{font-size:13px;font-weight:800;color:#17754a;margin-top:19px}
+.blestima-home .bl-footer{background:radial-gradient(ellipse at 92% 0%,#1c634c,#102d27 52%,#0c2520 100%);color:#d8e7de;padding:85px 24px 25px}
+.blestima-home .bl-footer-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.65fr .75fr 1fr .9fr;gap:45px;padding-bottom:72px}
+.blestima-home .bl-footer-kicker{color:#b9e6b0;font-size:11px;letter-spacing:.19em;font-weight:850}
+.blestima-home .bl-footer-brand h2{font-size:clamp(27px,2.6vw,39px);line-height:1.17;letter-spacing:-.04em;font-weight:850;color:#fff;margin:17px 0}
+.blestima-home .bl-footer-brand h2 em{color:#b9e6b0}
+.blestima-home .bl-footer-brand>p{font-size:14px;line-height:1.85;color:#bbd0c3;max-width:340px}
+.blestima-home .bl-footer-shop{display:inline-flex;gap:12px;align-items:center;margin-top:22px;padding:12px 17px;border:1px solid #8bbda580;border-radius:11px;color:#e6f6e8;text-decoration:none;font-weight:800;font-size:12px}
+.blestima-home .bl-footer-shop:hover{background:#ffffff18}
+.blestima-home .bl-footer-column h3{font-size:13px;font-weight:850;letter-spacing:.06em;color:#fff;margin:9px 0 24px}
+.blestima-home .bl-footer-column>a,.blestima-home .bl-footer-column>p{display:block;color:#bfd2c7;text-decoration:none;font-size:13px;line-height:1.9;margin-bottom:12px;overflow-wrap:anywhere}
+.blestima-home .bl-footer-column>a:hover{color:#bceba8}
+.blestima-home .bl-footer-social{display:flex;gap:11px;margin-bottom:20px}
+.blestima-home .bl-footer-social a{display:grid;place-items:center;width:41px;height:41px;border:1px solid #ffffff35;background:#ffffff10;border-radius:12px;color:#fff;font-size:19px}
+.blestima-home .bl-footer-social a:hover{background:#ffffff27;transform:translateY(-2px)}
+.blestima-home .bl-footer-bottom{max-width:1240px;margin:auto;border-top:1px solid #ffffff23;padding-top:24px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#9eb7a8;font-size:12px}
+@media(max-width:900px){.blestima-home .bl-delivery-inner{gap:28px}.blestima-home .bl-footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px}}
+@media(max-width:650px){.blestima-home .bl-featured-section{padding-top:55px;padding-bottom:65px}.blestima-home .bl-why-section{padding:65px 18px 72px}.blestima-home .bl-benefits-grid{grid-template-columns:1fr;gap:13px}.blestima-home .bl-benefit{padding:25px}.blestima-home .bl-benefit-icon{margin-bottom:16px}.blestima-home .bl-delivery-section{padding:65px 18px}.blestima-home .bl-delivery-inner{grid-template-columns:1fr;gap:32px}.blestima-home .bl-delivery-copy p{font-size:14px}.blestima-home .bl-testimonials{padding:66px 17px 72px}.blestima-home .bl-testimonials>div>div{min-height:0;padding:25px!important}.blestima-home .bl-footer{padding:60px 20px 22px}.blestima-home .bl-footer-inner{grid-template-columns:1fr;gap:25px;padding-bottom:42px}.blestima-home .bl-footer-column h3{margin-bottom:13px}.blestima-home .bl-footer-bottom{font-size:11px}}
+
+/* Homepage customer reviews — scoped; no invented ratings */
+.blestima-home .bl-testimonials{background:linear-gradient(150deg,#f1f8f3,#fff 65%,#f3faf5);padding:90px 24px 105px;border-top:1px solid #e5f0e9}
+.blestima-home .bl-reviews-container{max-width:1240px;margin:auto}
+.blestima-home .bl-reviews-heading{text-align:center;max-width:650px;margin:0 auto 43px}
+.blestima-home .bl-reviews-eyebrow{display:block;color:#258656;font-size:11px;font-weight:850;letter-spacing:.2em;margin-bottom:14px}
+.blestima-home .bl-reviews-heading h2{font-size:clamp(30px,3.5vw,48px);font-weight:850;letter-spacing:-.045em;line-height:1.16;color:#183e2f;margin:0 0 14px}
+.blestima-home .bl-reviews-heading h2 em{font-style:normal;color:#32895c}
+.blestima-home .bl-reviews-heading p{color:#677e70;line-height:1.8;font-size:15px}
+.blestima-home .bl-reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.blestima-home .bl-review-card{background:#fff;border:1px solid #e1ece5;border-radius:22px;box-shadow:0 15px 40px #143d290f;padding:29px 30px 27px;display:flex;flex-direction:column;min-height:282px;transition:transform .2s,box-shadow .2s}
+.blestima-home .bl-review-card:hover{transform:translateY(-4px);box-shadow:0 22px 55px #143d291a}
+.blestima-home .bl-review-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.blestima-home .bl-review-quote-mark{font:700 65px/.8 Georgia,serif;color:#299460}
+.blestima-home .bl-review-number{color:#8da897;font-size:10px;font-weight:800;letter-spacing:.14em;margin-top:8px}
+.blestima-home .bl-review-card blockquote{margin:0 0 27px;color:#304b3b;font-size:16px;line-height:1.8;flex:1}
+.blestima-home .bl-review-author{display:flex;gap:12px;align-items:center;padding-top:20px;border-top:1px solid #e8f0ea}
+.blestima-home .bl-review-avatar{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:50%;background:#e6f4e9;color:#176a45;font-size:17px;font-weight:850}
+.blestima-home .bl-review-author-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.blestima-home .bl-review-author-text strong{font-size:13px;font-weight:800;color:#1d4934}
+.blestima-home .bl-review-author-text small{font-size:11px;color:#829588}
+@media(max-width:900px){.blestima-home .bl-reviews-grid{gap:12px}.blestima-home .bl-review-card{padding:24px 19px}}
+@media(max-width:700px){.blestima-home .bl-testimonials{padding:65px 18px 75px}.blestima-home .bl-reviews-heading{margin-bottom:28px}.blestima-home .bl-reviews-grid{grid-template-columns:1fr;gap:15px}.blestima-home .bl-review-card{min-height:0;padding:25px}.blestima-home .bl-review-card blockquote{font-size:15px;margin-bottom:26px}}
+@media(prefers-reduced-motion:reduce){.blestima-home .bl-review-card{transition:none}.blestima-home .bl-review-card:hover{transform:none}}
+
+/* Featured products carousel and paginated catalog */
+.blestima-home .bl-featured-section{max-width:1300px;margin:0 auto;overflow:hidden}
+.blestima-home .bl-carousel-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:1240px;margin:0 auto 20px}
+.blestima-home .bl-carousel-eyebrow{font-size:11px;letter-spacing:.17em;font-weight:850;color:#17834d}
+.blestima-home .bl-carousel-toolbar p{font-size:14px;color:#667b70;margin-top:6px}
+.blestima-home .bl-carousel-controls{display:flex;gap:9px;flex-shrink:0}
+.blestima-home .bl-carousel-controls button{width:43px;height:43px;display:grid;place-items:center;border-radius:50%;background:white;border:1px solid #dce9e0;color:#15583b;font-size:28px;line-height:1;box-shadow:0 5px 15px #0a3b2010;transition:background .2s}
+.blestima-home .bl-carousel-controls button:hover{background:#e8f6ed}
+.blestima-home .bl-featured-track{display:flex!important;gap:20px!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scroll-padding:4px;padding:4px 4px 25px;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#b9d8c5 transparent}
+.blestima-home .bl-featured-track>.bl-product-card{flex:0 0 calc((100% - 60px)/4);min-width:0;scroll-snap-align:start}
+.blestima-home .bl-featured-track .bl-product-card{border-radius:20px!important}
+.blestima-catalog .bl-catalog-subtitle{color:#637a6c;margin:10px 0 28px;font-size:15px}
+.blestima-catalog .bl-catalog-search-row{display:flex;align-items:center;gap:15px;justify-content:space-between;margin-bottom:26px}
+.blestima-catalog .bl-catalog-search{display:flex;align-items:center;gap:12px;flex:1;max-width:670px;background:white;border:1px solid #d8e6dc;border-radius:14px;padding:12px 16px;box-shadow:0 6px 20px #143e2810}
+.blestima-catalog .bl-catalog-search span{color:#2a7d53;font-size:25px;line-height:1}
+.blestima-catalog .bl-catalog-search input{border:0;outline:0;background:transparent;min-width:0;width:100%;font-size:14px;color:#183f2b}
+.blestima-catalog .bl-catalog-search:focus-within{border-color:#159452;box-shadow:0 0 0 3px #15945218}
+.blestima-catalog .bl-catalog-result-count{font-size:13px;color:#637a6c;white-space:nowrap}
+.blestima-catalog .bl-catalog-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px;margin:46px 0 18px}
+.blestima-catalog .bl-catalog-pagination button{min-width:41px;height:41px;padding:0 12px;border:1px solid #d9e9dd;border-radius:11px;background:white;color:#17553b;font-size:14px;font-weight:750}
+.blestima-catalog .bl-catalog-pagination button.is-current{background:#07984d;border-color:#07984d;color:white}
+.blestima-catalog .bl-catalog-pagination button:hover:not(:disabled):not(.is-current){background:#e8f6ed}
+.blestima-catalog .bl-catalog-pagination button:disabled{opacity:.35;cursor:not-allowed}
+.blestima-catalog .bl-catalog-page-summary{text-align:center;color:#71867a;font-size:12px;margin-bottom:25px}
+.blestima-catalog .bl-catalog-empty{text-align:center;padding:50px 15px;color:#627e6c}
+@media(max-width:1000px){.blestima-home .bl-featured-track>.bl-product-card{flex-basis:calc((100% - 40px)/3)}}
+@media(max-width:720px){.blestima-home .bl-featured-track{gap:12px!important;scroll-padding:2px}.blestima-home .bl-featured-track>.bl-product-card{flex-basis:calc((100% - 12px)/2)}.blestima-home .bl-carousel-controls button{width:37px;height:37px}.blestima-catalog .bl-catalog-search-row{gap:10px}.blestima-catalog .bl-catalog-result-count{font-size:11px}}
+@media(max-width:410px){.blestima-home .bl-featured-track>.bl-product-card{flex-basis:82%}}
+@media(prefers-reduced-motion:reduce){.blestima-home .bl-featured-track{scroll-behavior:auto}}
+
+
+/* Product cards: compact, consistent information layout on homepage + catalog */
+.blestima-home .bl-product-body,.blestima-catalog .bl-product-body{
+  padding:12px 15px 14px!important;
+  gap:3px!important;
+  justify-content:flex-start;
+}
+.blestima-home .bl-product-body h3,.blestima-catalog .bl-product-body h3{
+  min-height:0!important;
+  margin:0!important;
+  line-height:1.28!important;
+  font-size:clamp(14px,1.18vw,17px)!important;
+}
+.blestima-home .bl-product-body>p,.blestima-catalog .bl-product-body>p{
+  min-height:0!important;
+  margin:1px 0 0!important;
+  line-height:1.35!important;
+  font-size:12px!important;
+  -webkit-line-clamp:2;
+}
+.blestima-home .bl-product-body>div:last-child,.blestima-catalog .bl-product-body>div:last-child{
+  margin-top:7px!important;
+  padding-top:0!important;
+  gap:6px!important;
+}
+.blestima-home .bl-product-body span.text-green-700,.blestima-catalog .bl-product-body span.text-green-700{
+  font-size:clamp(15px,1.2vw,18px)!important;
+  line-height:1.3!important;
+}
+.blestima-home .bl-product-body button,.blestima-catalog .bl-product-body button{
+  min-height:36px!important;
+  padding-top:7px!important;
+  padding-bottom:7px!important;
+}
+@media(max-width:650px){
+  .blestima-home .bl-product-body,.blestima-catalog .bl-product-body{padding:10px 11px 12px!important;gap:3px!important}
+  .blestima-home .bl-product-body h3,.blestima-catalog .bl-product-body h3{font-size:14px!important}
+  .blestima-home .bl-product-body>p,.blestima-catalog .bl-product-body>p{font-size:11px!important}
+  .blestima-home .bl-product-body>div:last-child,.blestima-catalog .bl-product-body>div:last-child{margin-top:5px!important;gap:5px!important}
+  .blestima-home .bl-product-body button,.blestima-catalog .bl-product-body button{min-height:34px!important;padding-top:6px!important;padding-bottom:6px!important}
+}
+/* Admin: make the existing create-product workflow discoverable */
+.blestima-admin .bl-admin-create-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#0b9852;color:white;border:0;border-radius:12px;padding:12px 18px;font-weight:800;box-shadow:0 6px 16px #0b985228;cursor:pointer}
+.blestima-admin .bl-admin-create-action:hover{background:#087d43}
+.blestima-admin .bl-admin-form-note{font-size:13px;color:#64776c;line-height:1.6;margin:-7px 0 18px}
+.blestima-admin .bl-admin-cancel{padding:12px 18px;border:1px solid #cbdad0;border-radius:10px;color:#31513e;background:#f4faf5;font-weight:700;cursor:pointer}
+@media(max-width:650px){.blestima-admin .bl-admin-create-action{width:100%}}

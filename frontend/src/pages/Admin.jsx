@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import "../blestimaRefresh.css";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  const productFormRef = useRef(null);
+  const productNameRef = useRef(null);
  
 console.log("ADMIN COMPONENT STARTED");
 
@@ -376,6 +379,8 @@ useEffect(() => {
   function resetForm() {
 
   setEditingId(null);
+  setCategory("");
+  setStockStatus("In Stock");
 
   setName("");
 
@@ -389,6 +394,12 @@ useEffect(() => {
 
   setImageFile2(null);
 
+  }
+
+  function openNewProductForm() {
+    resetForm();
+    productFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => productNameRef.current?.focus(), 350);
   }
 
   /*
@@ -487,6 +498,10 @@ const res = await fetch(
       const data =
         await res.json();
 
+      if (!res.ok || !data.success) {
+        alert(data.message || data.error || "Could not save the product. Please try again.");
+        return;
+      }
       if (data.success) {
         alert(
           editingId
@@ -529,9 +544,9 @@ const res = await fetch(
       product.imageUrl || ""
     );
 
-    window.scrollTo({
-      top: 0,
+    productFormRef.current?.scrollIntoView({
       behavior: "smooth",
+      block: "start",
     });
   }
 
@@ -579,7 +594,7 @@ const res =
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="blestima-admin min-h-screen bg-gray-100 p-6">
 
       <div
   className="
@@ -629,6 +644,14 @@ const res =
     Logout
   </button>
 
+</div>
+
+<div className="mb-7 flex flex-col md:flex-row md:items-center md:justify-between gap-3 bg-white rounded-2xl p-5 shadow-sm border border-green-100">
+  <div>
+    <h2 className="font-bold text-lg text-green-950">Product management</h2>
+    <p className="text-sm text-gray-600">Create a brand-new product or edit an existing one below.</p>
+  </div>
+  <button type="button" onClick={openNewProductForm} className="bl-admin-create-action">＋ Create New Product</button>
 </div>
 
 {/* ORDERS */}
@@ -1156,7 +1179,7 @@ const res =
 
       {/* PRODUCT FORM */}
 
-      <div
+      <div ref={productFormRef} id="bl-admin-product-form"
   className="
     bg-white
     p-6
@@ -1173,13 +1196,15 @@ const res =
 
           {editingId
             ? "Edit Product"
-            : "Add Product"}
+            : "Create New Product"}
 
         </h2>
 
+        <p className="bl-admin-form-note">Enter a product name, description, category, stock status, price and an optional image. The product will be added to your existing catalog.</p>
         <div className="grid gap-4">
 
           <input
+            ref={productNameRef}
             type="text"
             placeholder="Product Name"
             value={name}
@@ -1277,6 +1302,7 @@ const res =
           
 <div className="flex gap-3"></div>
 
+          {editingId && <button type="button" onClick={openNewProductForm} className="bl-admin-cancel">Cancel editing / Create new product</button>}
           <button
             onClick={addProduct}
             className="bg-green-600 text-white py-3 rounded-lg font-bold"
