@@ -11,7 +11,20 @@ console.log("ADMIN COMPONENT STARTED");
 const navigate =
   useNavigate();
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);\n
+// SPECIAL OFFERS
+const [specialOffers, setSpecialOffers] = useState([]);
+const [offerEditingId, setOfferEditingId] = useState(null);
+const [offerTitle, setOfferTitle] = useState("");
+const [offerDescription, setOfferDescription] = useState("");
+const [offerMessage, setOfferMessage] = useState("");
+const [offerStartAt, setOfferStartAt] = useState("");
+const [offerEndAt, setOfferEndAt] = useState("");
+const [offerStatus, setOfferStatus] = useState("draft");
+const [offerBanner, setOfferBanner] = useState(null);
+const [offerItems, setOfferItems] = useState([]);
+const [offerSaving, setOfferSaving] = useState(false);
+
 
 const [analytics, setAnalytics] = useState(null);
 const [analyticsRange, setAnalyticsRange] = useState("7daysAgo");
@@ -347,7 +360,63 @@ formData.append(
 
   }
 }
-  /*
+async function loadSpecialOffers() {
+  try {
+    const token = localStorage.getItem("adminToken");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/special-offers/admin`, { headers: { Authorization: `Bearer ${token}` } });
+    const data = await res.json();
+    if (data.success) setSpecialOffers(data.offers || []);
+  } catch (error) { console.error("Failed to load special offers", error); }
+}
+function resetSpecialOfferForm() {
+  setOfferEditingId(null); setOfferTitle(""); setOfferDescription(""); setOfferMessage("");
+  setOfferStartAt(""); setOfferEndAt(""); setOfferStatus("draft"); setOfferBanner(null); setOfferItems([]);
+}
+function toggleOfferProduct(product) {
+  setOfferItems((current) => current.some((item) => item.productId === product.id)
+    ? current.filter((item) => item.productId !== product.id)
+    : [...current, { productId: product.id, offerPrice: "", isActive: true }]);
+}
+function changeOfferItem(productId, field, value) {
+  setOfferItems((current) => current.map((item) => item.productId === productId ? { ...item, [field]: value } : item));
+}
+function editSpecialOffer(offer) {
+  setOfferEditingId(offer.id); setOfferTitle(offer.title || ""); setOfferDescription(offer.description || "");
+  setOfferMessage(offer.message || "");
+  setOfferStartAt(offer.startAt ? new Date(offer.startAt).toISOString().slice(0,16) : "");
+  setOfferEndAt(offer.endAt ? new Date(offer.endAt).toISOString().slice(0,16) : "");
+  setOfferStatus(offer.status || "draft"); setOfferBanner(null);
+  setOfferItems((offer.items || []).map((item) => ({ productId: item.productId, offerPrice: item.offerPrice || "", isActive: item.isActive !== false })));
+  document.getElementById("bl-admin-special-offers")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+async function saveSpecialOffer() {
+  if (!offerTitle.trim() || !offerStartAt || !offerEndAt || !offerItems.length) { alert("Please enter the offer title, dates, and select at least one product."); return; }
+  if (new Date(offerEndAt) <= new Date(offerStartAt)) { alert("The offer end date must be after the start date."); return; }
+  setOfferSaving(true);
+  try {
+    const token = localStorage.getItem("adminToken"); const fd = new FormData();
+    fd.append("title", offerTitle.trim()); fd.append("description", offerDescription); fd.append("message", offerMessage);
+    fd.append("startAt", new Date(offerStartAt).toISOString()); fd.append("endAt", new Date(offerEndAt).toISOString());
+    fd.append("status", offerStatus); fd.append("items", JSON.stringify(offerItems)); if (offerBanner) fd.append("banner", offerBanner);
+    const endpoint = offerEditingId ? `${import.meta.env.VITE_API_URL}/api/special-offers/${offerEditingId}` : `${import.meta.env.VITE_API_URL}/api/special-offers`;
+    const res = await fetch(endpoint, { method: offerEditingId ? "PUT" : "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
+    const data = await res.json();
+    if (!res.ok || !data.success) { alert(data.message || "Could not save the special offer."); return; }
+    alert(offerEditingId ? "Special offer updated." : "Special offer created."); resetSpecialOfferForm(); loadSpecialOffers();
+  } catch (error) { console.error(error); alert("An error occurred while saving the special offer."); }
+  finally { setOfferSaving(false); }
+}
+async function changeSpecialOfferStatus(offer, status) {
+  try {
+    const token = localStorage.getItem("adminToken");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/special-offers/${offer.id}/status`, {
+      method: "PATCH", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ status }),
+    });
+    const data = await res.json(); if (!res.ok || !data.success) { alert(data.message || "Could not update offer status."); return; }
+    loadSpecialOffers();
+  } catch (error) { console.error(error); alert("Failed to update offer status."); }
+}
+\n  /*
   |--------------------------------------------------------------------------
   | INITIAL LOAD
   |--------------------------------------------------------------------------
@@ -955,7 +1024,21 @@ const res =
     </div>
   )}
 
-      {/* BUSINESS SETTINGS */}
+{/* SPECIAL OFFERS */}
+<section id="bl-admin-special-offers" className="bg-white p-5 md:p-6 rounded-2xl shadow-lg mb-10">
+<div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-5"><div><h2 className="text-2xl font-bold">Special Offers</h2><p className="text-gray-600 mt-1">Create promotions with selected products, offer prices, dates, and banners.</p></div><button type="button" onClick={resetSpecialOfferForm} className="bg-green-600 text-white rounded-lg px-4 py-2 font-semibold">＋ New Offer</button></div>
+<div className="border rounded-xl p-4 mb-6 grid gap-4"><h3 className="text-lg font-bold">{offerEditingId ? "Edit Special Offer" : "Create Special Offer"}</h3>
+<input value={offerTitle} onChange={(e)=>setOfferTitle(e.target.value)} placeholder="Offer title" className="border rounded-lg p-3"/>
+<textarea value={offerDescription} onChange={(e)=>setOfferDescription(e.target.value)} placeholder="Offer description" rows={3} className="border rounded-lg p-3"/>
+<textarea value={offerMessage} onChange={(e)=>setOfferMessage(e.target.value)} placeholder="Optional promotional message" rows={2} className="border rounded-lg p-3"/>
+<div className="grid md:grid-cols-2 gap-3"><label className="grid gap-1 text-sm font-medium">Starts<input type="datetime-local" value={offerStartAt} onChange={(e)=>setOfferStartAt(e.target.value)} className="border rounded-lg p-3"/></label><label className="grid gap-1 text-sm font-medium">Ends<input type="datetime-local" value={offerEndAt} onChange={(e)=>setOfferEndAt(e.target.value)} className="border rounded-lg p-3"/></label></div>
+<label className="grid gap-1 text-sm font-medium">Banner image (JPEG, PNG, WebP; max 10 MB)<input type="file" accept="image/jpeg,image/png,image/webp" onChange={(e)=>setOfferBanner(e.target.files?.[0]||null)} className="border rounded-lg p-3"/></label>
+{offerBanner && <p className="text-sm text-gray-500">Selected: {offerBanner.name}</p>}
+<label className="grid gap-1 text-sm font-medium">Status<select value={offerStatus} onChange={(e)=>setOfferStatus(e.target.value)} className="border rounded-lg p-3"><option value="draft">Draft</option><option value="active">Active</option></select></label>
+<div><h4 className="font-semibold mb-2">Select products and optional offer prices</h4><div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">{products.filter(p=>p.isActive&&p.stockStatus==="In Stock").map(product=>{const selected=offerItems.find(item=>item.productId===product.id);return <div key={product.id} className="border rounded-lg p-3 grid gap-2"><label className="flex items-center gap-2 font-medium"><input type="checkbox" checked={!!selected} onChange={()=>toggleOfferProduct(product)}/>{product.name}</label><p className="text-sm text-gray-500">Regular price: ₦{product.price}</p>{selected&&<input value={selected.offerPrice} onChange={(e)=>changeOfferItem(product.id,"offerPrice",e.target.value)} placeholder="Offer price (optional)" className="border rounded p-2 text-sm"/>}</div>})}</div>{offerItems.length>0&&<p className="mt-2 text-sm text-green-700">{offerItems.length} selected product(s).</p>}</div>
+<div className="flex flex-wrap gap-2"><button type="button" disabled={offerSaving} onClick={saveSpecialOffer} className="bg-green-600 disabled:opacity-50 text-white rounded-lg px-5 py-3 font-bold">{offerSaving?"Saving...":offerEditingId?"Update Offer":"Save Offer"}</button>{offerEditingId&&<button type="button" onClick={resetSpecialOfferForm} className="border rounded-lg px-4 py-3">Cancel Edit</button>}</div></div>
+<div className="grid md:grid-cols-2 gap-4">{specialOffers.map(offer=><article key={offer.id} className="border rounded-xl p-4">{offer.bannerUrl&&<img src={offer.bannerUrl} alt={offer.title} className="w-full max-h-52 object-cover rounded-lg mb-3"/>}<div className="flex justify-between gap-2 items-start"><h3 className="font-bold text-lg">{offer.title}</h3><span className="text-xs uppercase font-semibold border rounded px-2 py-1">{offer.status}</span></div>{offer.description&&<p className="text-sm text-gray-600 mt-2">{offer.description}</p>}<p className="text-xs text-gray-500 mt-2">{new Date(offer.startAt).toLocaleString()} — {new Date(offer.endAt).toLocaleString()}</p><p className="text-sm mt-2">{offer.items?.length||0} product(s)</p><div className="flex flex-wrap gap-2 mt-3"><button type="button" onClick={()=>editSpecialOffer(offer)} className="bg-blue-600 text-white rounded px-3 py-2 text-sm">Edit</button>{offer.status==="active"?<button type="button" onClick={()=>changeSpecialOfferStatus(offer,"paused")} className="bg-amber-500 text-white rounded px-3 py-2 text-sm">Pause</button>:<button type="button" onClick={()=>changeSpecialOfferStatus(offer,"active")} className="bg-green-600 text-white rounded px-3 py-2 text-sm">Activate</button>}{offer.status!=="draft"&&<button type="button" onClick={()=>changeSpecialOfferStatus(offer,"draft")} className="border rounded px-3 py-2 text-sm">Set Draft</button>}</div></article>)}{specialOffers.length===0&&<p className="text-gray-500">No special offers created yet.</p>}</div></section>
+\n      {/* BUSINESS SETTINGS */}
 
       <div
   className="
