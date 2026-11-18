@@ -8,6 +8,34 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+
+model SpecialOffer {
+  id          Int               @id @default(autoincrement())
+  title       String
+  description String?
+  message     String?
+  bannerUrl   String?
+  startAt     DateTime
+  endAt       DateTime
+  status      String             @default("draft")
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  items       SpecialOfferItem[]
+}
+
+model SpecialOfferItem {
+  id             Int         @id @default(autoincrement())
+  specialOfferId Int
+  productId      Int
+  offerPrice     String?
+  isActive       Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  specialOffer   SpecialOffer @relation(fields: [specialOfferId], references: [id], onDelete: Cascade)
+  product        Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([specialOfferId, productId])
+}
+
 model Product {
   id          Int         @id @default(autoincrement())
   name        String
@@ -21,6 +49,7 @@ model Product {
   createdAt   DateTime    @default(now())
   enquiries   Enquiry[]
   promoPosts  PromoPost[]
+  specialOfferItems SpecialOfferItem[]
 }
 
 model PromoPost {
