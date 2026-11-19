@@ -4,23 +4,39 @@ const {
   createDailyPromo,
 } = require("../services/promoService");
 
+let isRunning = false;
+
 function startDailyPromoJob() {
+  const schedule = process.env.SOCIAL_POST_SCHEDULE || "0 9,18 * * *";
+  const timezone = process.env.SOCIAL_POST_TIMEZONE || "Africa/Lagos";
 
-  console.log("Daily promo scheduler started ✅");
+  if (!cron.validate(schedule)) {
+    throw new Error(`Invalid SOCIAL_POST_SCHEDULE cron expression: ${schedule}`);
+  }
 
-  cron.schedule("* * * * *", async () => {
+  console.log(`Social media scheduler configured: ${schedule} (${timezone})`);
 
-    console.log("Running promo job...");
+  return cron.schedule(
+    schedule,
+    async () => {
+      if (isRunning) {
+        console.warn("Social post job skipped because the previous run is still in progress.");
+        return;
+      }
 
-    try {
+      isRunning = true;
+      console.log("Starting scheduled social media promo...");
 
-      await createDailyPromo();
-
-    } catch (error) {
-
-      console.error(error.message);
-    }
-  });
+      try {
+        await createDailyPromo();
+      } catch (error) {
+        console.error("Scheduled social media promo failed:", error.message);
+      } finally {
+        isRunning = false;
+      }
+    },
+    { timezone }
+  );
 }
 
 module.exports = {
