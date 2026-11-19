@@ -28,6 +28,7 @@ model PromoPost {
   productId        Int
   platform         String
   content          String
+  flyerUrl         String?
   status           String    @default("draft")
   facebookPostId   String?
   instagramMediaId String?
