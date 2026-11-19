@@ -1,4 +1,5 @@
 import "../blestimaRefresh.css";
+import SocialMediaManager from "../components/SocialMediaManager";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -1397,6 +1398,8 @@ const res =
         ))}
 
       </div>
+
+      <SocialMediaManager />
 
     </div>
   );
