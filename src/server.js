@@ -27,6 +27,9 @@ const settingsRoutes =
 const analyticsRoutes =
   require("./routes/analyticsRoutes");
 
+const socialMediaRoutes =
+  require("./routes/socialMediaRoutes");
+
 const app = express();
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +105,11 @@ app.use(
 app.use(
   "/api/auth",
   authRoutes
+);
+
+app.use(
+  "/api/social-media",
+  socialMediaRoutes
 );
 
 /*
